@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".section05_canvas.a3_canvas_scale.CanvasScaleViewActivity">
+  <com.example.draw_android.section05_canvas.a3_canvas_scale.CanvasScaleView
+      android:layout_width="match_parent"
+      android:background="#ff00ff"
+      android:layout_height="match_parent">
+
+  </com.example.draw_android.section05_canvas.a3_canvas_scale.CanvasScaleView>
+</RelativeLayout>

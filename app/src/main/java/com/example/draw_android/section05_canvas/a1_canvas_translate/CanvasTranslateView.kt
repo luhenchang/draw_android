@@ -1,5 +1,3 @@
-package com.example.draw_android.section05_canvas
-
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
