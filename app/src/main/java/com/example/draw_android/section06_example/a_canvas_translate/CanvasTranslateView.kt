@@ -1,4 +1,4 @@
-package com.example.draw_android.section05_canvas
+package com.example.draw_android.section06_example.a_canvas_translate
 
 import android.content.Context
 import android.util.AttributeSet

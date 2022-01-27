@@ -9,19 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Draw_android">
-<!--        <activity-->
-<!--            android:name=".section05_canvas.a3_canvas_scale.CanvasScaleViewActivity"-->
-<!--            android:exported="true" />-->
         <activity
-            android:name=".section05_canvas.a3_canvas_scale.CanvasScaleViewActivity"
-            android:theme="@style/Theme.NoActionBar"
-            android:exported="true">
+            android:name=".section01_draw.a_view.CanvasViewActivity"
+            android:exported="true"
+            android:theme="@style/Theme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".section05_canvas.a3_canvas_scale.CanvasScaleViewActivity"
+            android:theme="@style/Theme.NoActionBar"/>
     </application>
 
 </manifest>
