@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Draw_android">
         <activity
+            android:name=".section01_draw.b_compose.CanvasComposeActivity"
+            android:exported="true" />
+        <activity
             android:name=".section01_draw.a_view.CanvasViewActivity"
             android:exported="true"
             android:theme="@style/Theme.NoActionBar">
@@ -21,7 +24,7 @@
         </activity>
         <activity
             android:name=".section05_canvas.a3_canvas_scale.CanvasScaleViewActivity"
-            android:theme="@style/Theme.NoActionBar"/>
+            android:theme="@style/Theme.NoActionBar" />
     </application>
 
 </manifest>
