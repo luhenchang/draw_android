@@ -10,6 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Draw_android">
         <activity
+            android:name=".section07_time_line.a_draw_time_line.DrawTimeLineActivity"
+            android:exported="true"
+            android:theme="@style/Theme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".section16_line_chart.c_stached_line_chart.StackedLineChartActivity"
             android:exported="true"
             android:theme="@style/Theme.NoActionBar">
@@ -22,12 +32,11 @@
         <activity
             android:name=".section16_line_chart.b_basic_area_chart.BasicAreaChartActivity"
             android:exported="true"
-            android:theme="@style/Theme.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.NoActionBar" />
         <activity
             android:name=".section16_line_chart.a_basic_line_chart.BasicLineChartActivity"
             android:exported="true"
-            android:theme="@style/Theme.NoActionBar"></activity>
+            android:theme="@style/Theme.NoActionBar" />
         <activity
             android:name=".section01_draw.b_compose.CanvasComposeActivity"
             android:exported="true" />
