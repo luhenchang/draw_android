@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Draw_android">
         <activity
-            android:name=".section07_time_line.a_draw_time_line.DrawTimeLineActivity"
+            android:name=".section08_vertical_time_line.a_draw_vertical_time_line.DrawVerticalTimeLineActivity"
             android:exported="true"
             android:theme="@style/Theme.NoActionBar">
             <intent-filter>
@@ -18,6 +18,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".section07_time_line.a_draw_time_line.DrawTimeLineActivity"
+            android:exported="true"
+            android:theme="@style/Theme.NoActionBar">
         </activity>
         <activity
             android:name=".section16_line_chart.c_stached_line_chart.StackedLineChartActivity"

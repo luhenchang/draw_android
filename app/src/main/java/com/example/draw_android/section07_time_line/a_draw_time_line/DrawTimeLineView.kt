@@ -6,19 +6,11 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
-import android.text.InputType
 import android.util.AttributeSet
-import android.util.Log
-import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
-import android.view.inputmethod.BaseInputConnection
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputConnection
 import android.view.inputmethod.InputMethodManager
 import kotlin.math.ceil
-import kotlin.math.floor
-
 /**
  * Created by wangfei44 on 2022/2/7.
  */
@@ -58,7 +50,7 @@ class DrawTimeLineView constructor(context: Context, attributeSet: AttributeSet)
     private val rectWidth = 400f
 
     @SuppressLint("DrawAllocation")
-    override fun onDraw(canvas: Canvas) {
+    override fun onDraw(canvas: Canvas) {//垂直线
         super.onDraw(canvas)
         viewCanvas = canvas
         canvas.translate(0f, height.toFloat())
@@ -156,6 +148,8 @@ class DrawTimeLineView constructor(context: Context, attributeSet: AttributeSet)
                             buffer.toString().length
                         ))
                     ) {
+                        //这里多想想，如果和小册内部一样不设置，当换行的时候是不是就会少增加一个索引，导致重复绘制上一个字母？
+                        lengthIndex++
                         flag = false
                     } else {
                         lengthIndex++
