@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import kotlin.math.ceil
+import kotlin.random.Random
 
 
 /**
@@ -21,106 +22,130 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
     View(context, attributeSet) {
 
     //1，首先创造数据
+    private val colors: Array<Int> = arrayOf(
+        Color.argb(255, 178, 93, 95),
+        Color.argb(255, 119, 151, 205),
+        Color.argb(255, 78, 87, 111),
+        Color.argb(255, 138, 106, 111)
+    )
     private val dataList = arrayListOf(
         DrawData(
             "1995-1998",
             R.drawable.ic_yuel,
-            "Hilt includes extensions for providing classes from other Jetpack libraries. Hilt currently supports the following Jetpack components"
+            "Hilt includes extensions for providing classes from other Jetpack libraries. Hilt currently supports the following Jetpack components",
+            colors[0]
         ),
         DrawData(
             "1998-2000",
-            R.drawable.ic_yuel,
-            "You must add the Hilt dependencies to take advantage of these integrations. For more information about adding dependencies, see Dependency injection with Hilt."
+            R.drawable.accessibility,
+            "You must add the Hilt dependencies to take advantage of these integrations. For more information about adding dependencies, see Dependency injection with Hilt.",
+            colors[1]
         ),
         DrawData(
             "2000-2003",
-            R.drawable.ic_yuel,
-            "Provide a ViewModel by annotating it with @HiltViewModel and using the @Inject annotation in the ViewModel object's constructor."
+            R.drawable.battery,
+            "Provide a ViewModel by annotating it with @HiltViewModel and using the @Inject annotation in the ViewModel object's constructor.",
+            colors[2]
         ),
         DrawData(
             "2013-2003",
-            R.drawable.ic_yuel,
-            "All Hilt ViewModels are provided by the ViewModelComponent which follows the same lifecycle as a ViewModel, and as such, can survive configuration changes. To scope a dependency to a ViewModel use the @ViewModelScoped annotation."
+            R.drawable.donotdisturb,
+            "All Hilt ViewModels are provided by the ViewModelComponent which follows the same lifecycle as a ViewModel, and as such, can survive configuration changes. To scope a dependency to a ViewModel use the @ViewModelScoped annotation.",
+            colors[3]
         ),
         DrawData(
             "2003-2008",
-            R.drawable.ic_yuel,
-            "Add the following additional dependencies to your Gradle file"
+            R.drawable.music,
+            "Add the following additional dependencies to your Gradle file", colors[0]
         ),
         DrawData(
             "2008-2010",
-            R.drawable.ic_yuel,
-            "Add the following additional dependencies to your Gradle file. Note that in addition to the library, you need to include an additional annotation processor that works on top of the Hilt annotation processor"
+            R.drawable.notifications,
+            "Add the following additional dependencies to your Gradle file. Note that in addition to the library, you need to include an additional annotation processor that works on top of the Hilt annotation processor",
+            colors[1]
         ),
         DrawData(
             "2010-2019",
-            R.drawable.ic_yuel,
-            "Note that in addition to the library, you need to include an additional"
+            R.drawable.accessibility,
+            "Note that in addition to the library, you need to include an additional", colors[2]
         ),
         DrawData(
             "2019-2022",
-            R.drawable.ic_yuel,
-            "Note that in addition to the library, you need to include an additional Add the following additional dependencies"
+            R.drawable.donotdisturb,
+            "Note that in addition to the library, you need to include an additional Add the following additional dependencies",
+            colors[3]
         ),
         DrawData(
             "2022-2023",
-            R.drawable.ic_yuel,
-            "Then, have your Application class implement the Configuration.Provider interface, inject an instance of HiltWorkFactory, and pass it into the WorkManager configuration as follows"
+            R.drawable.music,
+            "Then, have your Application class implement the Configuration.Provider interface, inject an instance of HiltWorkFactory, and pass it into the WorkManager configuration as follows",
+            colors[0]
         ),
         DrawData(
             "2023-2026",
             R.drawable.ic_yuel,
-            "Inject a Worker using the @HiltWorker annotation in the class and @AssistedInject in the Worker object's constructor. You can use only @Singleton"
+            "Inject a Worker using the @HiltWorker annotation in the class and @AssistedInject in the Worker object's constructor. You can use only @Singleton",
+            colors[1]
         ),
         DrawData(
             "2026-2029",
-            R.drawable.ic_yuel,
-            "Note: Because this customizes the WorkManager configuration, you also must remove the default initializer from the AndroidManifest.xml file as specified in the WorkManager docs"
+            R.drawable.music,
+            "Note: Because this customizes the WorkManager configuration, you also must remove the default initializer from the AndroidManifest.xml file as specified in the WorkManager docs",
+            colors[2]
         ),
         DrawData(
             "2029-2030",
-            R.drawable.ic_yuel,
+            R.drawable.accessibility,
             "Content and code samples on this page are subject to the licenses described in the Content License"
+            ,colors[1]
         ),
         DrawData(
             "2030-2036",
             R.drawable.ic_yuel,
-            "Java is a registered trademark of Oracle and/or its affiliates.Last updated 2021-10-27 UTC."
+            "Java is a registered trademark of Oracle and/or its affiliates.Last updated 2021-10-27 UTC.",
+            colors[3]
         ),
         DrawData(
             "2036-2039",
-            R.drawable.ic_yuel,
-            "One of the benefits of using dependency injection frameworks like Hilt is that it makes testing your code easier."
+            R.drawable.music,
+            "One of the benefits of using dependency injection frameworks like Hilt is that it makes testing your code easier.",
+            colors[1]
         ),
         DrawData(
             "2039-2042",
-            R.drawable.ic_yuel,
-            "Hilt isn't necessary for unit tests, since when testing a class that uses constructor injection, you don't need to use Hilt to instantiate that class. Instead, just as you would if the constructor weren't annotated:"
+            R.drawable.notifications,
+            "Hilt isn't necessary for unit tests, since when testing a class that uses constructor injection, you don't need to use Hilt to instantiate that class. Instead, just as you would if the constructor weren't annotated:",
+            colors[2]
         ),
         DrawData(
             "2042-2047",
             R.drawable.ic_yuel,
-            "you can directly call a class constructor by passing in fake or mock dependencies"
+            "you can directly call a class constructor by passing in fake or mock dependencies",
+            colors[0]
         ),
         DrawData(
             "2047-2049",
-            R.drawable.ic_yuel,
-            "For integration tests, Hilt injects dependencies as it would in your production code. "
+            R.drawable.donotdisturb,
+            "For integration tests, Hilt injects dependencies as it would in your production code. ",
+            colors[2]
         ),
         DrawData(
             "2049-2052",
-            R.drawable.ic_yuel,
-            "Testing with Hilt requires no maintenance because Hilt automatically generates a new set of components for each test"
+            R.drawable.battery,
+            "Testing with Hilt requires no maintenance because Hilt automatically generates a new set of components for each test",
+            colors[3]
         ),
         DrawData(
             "2052-2056",
-            R.drawable.ic_yuel,
-            "o use Hilt in your tests, include the hilt-android-testing dependency in your project:"
+            R.drawable.notifications,
+            "o use Hilt in your tests, include the hilt-android-testing dependency in your project:",
+            colors[1]
         ),
         DrawData(
             "2056-2090",
             R.drawable.ic_yuel,
-            "You must annotate any UI test that uses Hilt with @HiltAndroidTest. This annotation is responsible for generating the Hilt components for each test."
+            "You must annotate any UI test that uses Hilt with @HiltAndroidTest. This annotation is responsible for generating the Hilt components for each test.",
+            colors[0]
         ),
     )
 
@@ -128,11 +153,11 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
 
     init {
         initScaleGestureDetector()
-        bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_yuel)
     }
+
     private var mScaleGestureDetector: ScaleGestureDetector? = null
-    private var preScale=1f //之前的伸缩值
-    private var curScale =1f //当前的伸缩值
+    private var preScale = 1f //之前的伸缩值
+    private var curScale = 1f //当前的伸缩值
     private fun initScaleGestureDetector() {
         mScaleGestureDetector = ScaleGestureDetector(
             context,
@@ -156,6 +181,7 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
                 override fun onScaleEnd(detector: ScaleGestureDetector) {}
             })
     }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         drawTopView(canvas)
@@ -191,8 +217,8 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
 
     private fun drawTopView(canvas: Canvas) {
         //最上面绘制的圆和线
-        canvas.translate(width / 2f, (margin*curScale+viewToTop))
-        canvas.scale(curScale,curScale)
+        canvas.translate(width / 2f, (margin * curScale + viewToTop))
+        canvas.scale(curScale, curScale)
         canvas.drawCircle(0f, 0f, scaleCircleRadius, circlePaint)
         //这里大家应该回顾一下，基础课程里面，当我绘制一个圆且画笔设置了宽度，那圆圈的半径是 = r+strokeWidth/2
         canvas.drawLine(
@@ -206,7 +232,7 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
         //Item部分的绘制
         //1，先在上面的基础上绘制圆圈
         canvas.translate(0f, topLineHeight + scaleCircleRadius + circlePaint.strokeWidth / 2)
-        canvas.drawCircle(0f,0f, scaleCircleRadius, circlePaint)
+        canvas.drawCircle(0f, 0f, scaleCircleRadius, circlePaint)
     }
 
 
@@ -275,6 +301,7 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
     private fun drawListView(canvas: Canvas) {
         maxYInit = 0f
         for (index in 0 until dataList.size) {
+            bitmap = BitmapFactory.decodeResource(resources,dataList[index].img)
             if (index % 2 == 0) {
                 drawLeftItem(canvas, index)
             } else {
@@ -292,7 +319,10 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
             (levelWidth + startX + largeCircle),
             0f,
             largeCircle,
-            circlePaint
+            circlePaint.apply {
+                color = dataList[index].color
+                setShadowLayout(dataList[index].color)
+            }
         )
         //region绘制文字部分---------1---------
         canvas.save()
@@ -305,7 +335,10 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
             -paddingHeight * 2 - rect.height(),
             rect.width().toFloat() + paddingHeight * 2,
             -paddingHeight + paddingHeight,
-            rectPaint
+            rectPaint.apply {
+                color = dataList[index].color
+                setShadowLayout(dataList[index].color)
+            }
         )
         canvas.drawText(
             dataList[index].year,
@@ -355,7 +388,10 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
             "Lorem Ipsum",
             0f,
             30f,//根据文字的高度来绘制下一行文字的具体高度。这里10是行间距
-            titlePaint
+            titlePaint.apply {
+                color = dataList[index].color
+                setShadowLayout(dataList[index].color)
+            }
         )
         canvas.restore()
         //endregion
@@ -377,7 +413,8 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
             rowCount * rowHeight + 60f,
             linePaint
         )
-        val translateY = rowCount * rowHeight + scaleCircleRadius + circlePaint.strokeWidth / 2 + 60f
+        val translateY =
+            rowCount * rowHeight + scaleCircleRadius + circlePaint.strokeWidth / 2 + 60f
         //这里进行绘制下一个圆形刻度
         canvas.translate(0f, translateY)
         canvas.drawCircle(0f, 0f, scaleCircleRadius, circlePaint)
@@ -396,7 +433,10 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
             -(levelWidth + startX + largeCircle),
             0f,
             largeCircle,
-            circlePaint
+            circlePaint.apply {
+                color = dataList[index].color
+                setShadowLayout(dataList[index].color)
+            }
         )
         //region绘制文字部分---------1---------
         canvas.save()
@@ -409,7 +449,10 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
             -paddingHeight * 2 - rect.height(),
             rect.width().toFloat() + paddingHeight * 2,
             -paddingHeight + paddingHeight,
-            rectPaint
+            rectPaint.apply {
+                color = dataList[index].color
+                setShadowLayout(dataList[index].color)
+            }
         )
         canvas.drawText(
             dataList[0].year,
@@ -459,7 +502,10 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
             "Lorem Ipsum",
             0f,
             30f,//根据文字的高度来绘制下一行文字的具体高度。这里10是行间距
-            titlePaint
+            titlePaint.apply {
+                color = dataList[index].color
+                setShadowLayout(dataList[index].color)
+            }
         )
         canvas.restore()
         //endregion
@@ -563,20 +609,21 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
                 startY = event.y
                 //将每次的滑动小段距离在当前距离的基础上叠加起来
                 viewToTop += dis
-                Log.e("viewToY","viewToY = $viewToTop")
-                Log.e("viewToY","maxYInit = $maxYInit")
-                val scrollBottomHeight = (maxYInit*curScale-(measuredHeight - margin*curScale-(topLineHeight + scaleCircleRadius + circlePaint.strokeWidth / 2)*curScale)+margin*curScale)
-                if (viewToTop <=  -scrollBottomHeight){
+                Log.e("viewToY", "viewToY = $viewToTop")
+                Log.e("viewToY", "maxYInit = $maxYInit")
+                val scrollBottomHeight =
+                    (maxYInit * curScale - (measuredHeight - margin * curScale - (topLineHeight + scaleCircleRadius + circlePaint.strokeWidth / 2) * curScale) + margin * curScale)
+                if (viewToTop <= -scrollBottomHeight) {
                     viewToTop = -scrollBottomHeight
                 }
                 //向下滑动时候
-                if (viewToTop>margin*curScale){
-                    viewToTop = margin*curScale
+                if (viewToTop > margin * curScale) {
+                    viewToTop = margin * curScale
                 }
-                if (viewToTop<=margin*curScale&&viewToTop>0){
+                if (viewToTop <= margin * curScale && viewToTop > 0) {
                     viewToTop = 0f
                 }
-               
+
                 invalidate()
             }
             MotionEvent.ACTION_DOWN -> {
@@ -588,7 +635,9 @@ class DrawVerticalTimeLineView constructor(context: Context, attributeSet: Attri
         }
         return true
     }
-
-    data class DrawData(val year: String, val img: Int, val content: String)
+    private fun Paint.setShadowLayout(state: Int) {
+        setShadowLayer(5f, 2f, 5f,state)
+    }
+    data class DrawData(val year: String, val img: Int, val content: String, val color: Int)
 
 }
