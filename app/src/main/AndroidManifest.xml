@@ -10,29 +10,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Draw_android">
         <activity
+            android:name=".section05_canvas.b_rotate.CanvasRotateViewActivity"
+            android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".section05_canvas.a_translate.CanvasTranslateViewActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".section03_paint.a2_blend_modle.PaintBlendMainActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".section03_paint.a1_style_stroke.PaintAPIViewActivity"
+            android:exported="true" />
+        <activity
             android:name=".section08_vertical_time_line.a_draw_vertical_time_line.DrawVerticalTimeLineActivity"
             android:exported="true"
-            android:theme="@style/Theme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.NoActionBar" />
         <activity
             android:name=".section07_time_line.a_draw_time_line.DrawTimeLineActivity"
             android:exported="true"
-            android:theme="@style/Theme.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.NoActionBar" />
         <activity
             android:name=".section16_line_chart.c_stached_line_chart.StackedLineChartActivity"
             android:exported="true"
             android:theme="@style/Theme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".section16_line_chart.b_basic_area_chart.BasicAreaChartActivity"
@@ -50,8 +55,15 @@
             android:exported="true"
             android:theme="@style/Theme.NoActionBar" />
         <activity
-            android:name=".section05_canvas.a3_canvas_scale.CanvasScaleViewActivity"
-            android:theme="@style/Theme.NoActionBar" />
+            android:name=".section05_canvas.c_scale.CanvasScaleViewActivity"
+            android:theme="@style/Theme.NoActionBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

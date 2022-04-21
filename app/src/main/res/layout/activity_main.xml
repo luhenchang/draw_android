@@ -15,11 +15,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.draw_android.section05_canvas.a3_canvas_scale.CanvasScaleView
+    <com.example.draw_android.section05_canvas.c_scale.CanvasScaleView
         android:layout_width="match_parent"
         android:background="@color/black"
         android:layout_height="match_parent">
 
-    </com.example.draw_android.section05_canvas.a3_canvas_scale.CanvasScaleView>
+    </com.example.draw_android.section05_canvas.c_scale.CanvasScaleView>
 
 </RelativeLayout>
