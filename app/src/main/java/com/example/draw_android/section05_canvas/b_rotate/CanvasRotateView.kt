@@ -50,8 +50,8 @@ class CanvasRotateView constructor(context: Context, attributeSet: AttributeSet)
             0f,
             0f,
             mWidth / 3f,
-            Color.parseColor("#EFF1F1"),
-            Color.parseColor("#E5E7EB"),
+            Color.parseColor("#E9EBEF"),
+            Color.parseColor("#EEFFFF"),
             Shader.TileMode.CLAMP
         )
     }
@@ -69,6 +69,7 @@ class CanvasRotateView constructor(context: Context, attributeSet: AttributeSet)
 
     }
 
+    private val arrayNumber = arrayOf(12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
     private fun drawScaleText(canvas: Canvas) {
         for (index in 0 until 12) {
             val R = width / 3f
@@ -78,46 +79,52 @@ class CanvasRotateView constructor(context: Context, attributeSet: AttributeSet)
             val endY = -R + 30f + 35f
             canvas.drawLine(startX, startY, endX, endY, hourPaint)
             canvas.rotate(30f)
+        }
+
+        for (index in arrayNumber.indices) {
+            val R = width / 3f
+            val startX = 0f
+            val endY = -R + 30f + 35f
             //刻度绘制文字
-            val text = (index + 1).toString()
-            //val textWidth = textPaint.measureText(text)
+            val text = arrayNumber[index].toString()
+
             val rect = Rect()
             textPaint.getTextBounds(text, 0, text.length, rect)
+            //进行状态储存
             canvas.save()
-            canvas.translate(startX ,endY + 20f)
-            if (scaleIndex.contains(index)) {
-                canvas.rotate(
-                    -(index + 1) * 30f,
-                    + 8f,
-                     - 10f
-                )
-                canvas.drawLine(0f,0f,100f,0f,xLinePaint)
-                canvas.drawLine(0f,0f,0f,100f,yLinePaint)
-
-            } else if (scaleBottomIndex.contains(index)) {
-                canvas.rotate(
-                    -(index + 1) * 30f,
-                    10f,
-                    0f
-                )
-                canvas.drawLine(0f,0f,100f,0f,xLinePaint)
-                canvas.drawLine(0f,0f,0f,100f,yLinePaint)
-            } else {
-                canvas.rotate(
-                    -(index + 1) * 30f,
-                    0f,
-                    0f
-                )
-                canvas.drawLine(0f,0f,100f,0f,xLinePaint)
-                canvas.drawLine(0f,0f,0f,100f,yLinePaint)
+            //将坐标系位置移动到绘制文字的底部。
+            canvas.translate(startX - rect.width() / 2f, endY + 20f + rect.height())
+            //因为整体会做旋转，为了让坐标系摆正，我们好一个个调整文字间距，那么需要逆时针进行旋转。
+            canvas.rotate(-30f * (index))
+            //画个X,Y参考坐标系。
+            //canvas.drawLine(0f, 0f, 100f, 0f, textPaint)
+            //canvas.drawLine(0f, 0f, 0f, 100f, textPaint)
+            when (index) {
+                3 -> {
+                    canvas.translate(0f, rect.height() / 2f)
+                }
+                4, 5, 6 -> {
+                    canvas.translate(-rect.width().toFloat(), rect.height().toFloat())
+                }
+                7, 8 -> {
+                    canvas.translate(-rect.width().toFloat(), rect.height().toFloat() / 2f)
+                }
+                9 -> {
+                    canvas.translate(-rect.width().toFloat(), 0f)
+                }
+                10 -> {
+                    canvas.translate(-rect.width().toFloat() / 2f, -rect.height().toFloat() / 2f)
+                }
             }
+            //绘制文字。
             canvas.drawText(
-                (index + 1).toString(),
+                arrayNumber[index].toString(),
                 0f,//手动画一下，startX为12点刻度减去文字的一半就是文字起始的X
                 0f,//文字在刻度下面，至少文字高度的地方，且给了20像素的空间
                 textPaint
             )
             canvas.restore()
+            canvas.rotate(30f)
         }
 
     }
@@ -169,8 +176,9 @@ class CanvasRotateView constructor(context: Context, attributeSet: AttributeSet)
 
     private val textPaint = Paint().apply {
         color = Color.BLACK
-        textSize = 30f
-        style = Paint.Style.FILL
+        textSize = 36f
+        strokeWidth = 2f
+        style = Paint.Style.FILL_AND_STROKE
         isAntiAlias = true
     }
     val scaleIndex = arrayOf(3, 4, 5, 6)
