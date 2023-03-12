@@ -49,9 +49,9 @@
             android:exported="true"
             android:theme="@style/Theme.NoActionBar" />
         <activity
-            android:name=".section05_canvas.c_scale.CanvasScaleViewActivity"
-            android:exported="true"
-            android:theme="@style/Theme.NoActionBar"></activity>
+                android:name=".section05_canvas.c_scale.CanvasScaleViewActivity"
+                android:exported="true"
+                android:theme="@style/Theme.NoActionBar" />
         <activity
             android:name=".section05_canvas.d_save_restore.CanvasSaveRestoreMainActivity"
             android:exported="true">
@@ -59,7 +59,7 @@
         <activity
                 android:theme="@style/Theme.NoActionBar"
                 android:name=".section05_canvas_clip.a_canvas_clip.ClipCanvasMainActivity"
-                android:exported="true"></activity>
+                android:exported="true" />
         <activity
                 android:theme="@style/Theme.NoActionBar"
                 android:name=".section04_path.a_path.PathApiViewActivity"

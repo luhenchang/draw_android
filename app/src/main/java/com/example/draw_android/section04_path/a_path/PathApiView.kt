@@ -121,13 +121,15 @@ class PathApiView constructor(context: Context, attributeSet: AttributeSet) :
         //drawOval(canvas)
 
         //八、drawPaint
-        drawPaint(canvas)
+        //drawPaint(canvas)
 
         //九、drawPath
         //Path-矩形
         //drawRect(canvas)
         //drawRadarChart(canvas)
 
+        //Path-复杂图形
+        drawComplexView(canvas)
 
 
 
@@ -135,6 +137,27 @@ class PathApiView constructor(context: Context, attributeSet: AttributeSet) :
 
         //4、裁剪
         //drawArc(canvas)
+    }
+
+    private fun drawComplexView(canvas: Canvas?) {
+        if (null == canvas){
+            Log.e(TAG,"drawComplexView::canvas is null return")
+            return
+        }
+        canvas.translate(width / 2f, height / 2f)
+        canvas.scale(1f, -1f)
+
+        val path = Path().apply {
+            moveTo(0f,0f)
+            lineTo(200f,200f)
+        }
+        val path1 = Path().apply {
+            moveTo(0f, 0f)
+            lineTo(0f, 100f)
+            addArc(0f, 100f, 100f, 0f, 0f, (Math.PI / 180 * 60).toFloat())
+        }
+        canvas.drawPath(path1, paint)
+
     }
 
 
