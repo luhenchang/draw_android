@@ -41,11 +41,17 @@ class CurveView constructor(context: Context, attributeSet: AttributeSet) :
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         Log.e("onDraw=", "001")
+        //绘制网格线//绘制文字x和y轴的
         BaseCanvasView.drawBaseBg(canvas, mWidth, mHeight)
         sizeChange = false
+        //绘制直线方程
         drawLine(canvas)
+        //绘制圆
         drawCircle(canvas)
+        //二阶曲线
         drawQuz(canvas)
+        //三阶曲线
+        drawCubic(canvas)
     }
 
     //圆方程式:(x-a)^2+(y-b)^2=r^2
@@ -122,24 +128,72 @@ class CurveView constructor(context: Context, attributeSet: AttributeSet) :
         canvas.drawPath(quePath, getPaint(Paint.Style.STROKE))
     }
 
+    //三阶控制点
+    private lateinit var cubicLeftRect: Rect
+
+    //三阶控制点
+    private lateinit var cubicRightRect: Rect
+    private var moveCubeX: Float = 80f
+    private var moveCubeY: Float = 80f
+    private var moveCubeXX: Float = 240f
+    private var moveCubeYY: Float = 80f
+    private fun drawCubic(canvas: Canvas) {
+        val cubicPath = Path()
+        cubicPath.moveTo(0f, 0f)
+        cubicLeftRect = Rect(
+            (moveCubeX - 30f).toInt(),
+            (moveCubeY - 30f).toInt(),
+            (moveCubeX + 30).toInt(),
+            (moveCubeY + 30f).toInt()
+        )
+        cubicRightRect = Rect(
+            (moveCubeXX - 30f).toInt(),
+            (moveCubeYY - 30f).toInt(),
+            (moveCubeXX + 30).toInt(),
+            (moveCubeYY + 30f).toInt()
+        )
+        val lineLeft = Path().apply {
+            moveTo(0f, 0f)
+            lineTo(moveCubeX, moveCubeY)
+            lineTo(moveCubeXX, moveCubeYY)
+            lineTo(320f, 0f)
+        }
+        canvas.drawPath(lineLeft, getPaint(Paint.Style.STROKE, Color.GRAY))
+        canvas.drawCircle(moveCubeX, moveCubeY, 10f, getPaintCir(Paint.Style.FILL))
+        canvas.drawCircle(moveCubeXX, moveCubeYY, 10f, getPaintCir(Paint.Style.FILL))
+        cubicPath.cubicTo(moveCubeX, moveCubeY, moveCubeXX, moveCubeYY, 320f, 0f)
+        canvas.drawPath(cubicPath, getPaint(Paint.Style.STROKE, Color.RED))
+    }
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             ACTION_DOWN,
             ACTION_MOVE -> {
                 //在控制点附近范围内部,进行移动
-                Log.e(
-                    "x=",
-                    "onTouchEvent: (x,y)" + (event.x - width / 2).toInt() + ":" + (-(event.y - height / 2)).toInt()
+                Log.e("x=", "onTouchEvent: (x,y)" + (event.x - width / 2).toInt() + ":" + (-(event.y - height / 2)).toInt()
                 )
-                //将手势坐标转换为屏幕坐标
-                moveX = event.x - width / 2
-                moveY = -(event.y - height / 2)
-                invalidate()
+                //二阶曲线
+                if (controlRect.contains((event.x - width / 2).toInt(), (-(event.y - height / 2)).toInt())
+                ) {
+                    Log.e("点击来", "对")
+                    moveX = event.x - width / 2
+                    moveY = -(event.y - height / 2)
+                    invalidate()
+                    //三阶曲线控制点1
+                } else if (cubicLeftRect.contains((event.x - width / 2).toInt(), (-(event.y - height / 2)).toInt())) {
+                    moveCubeX = event.x - width / 2
+                    moveCubeY = -(event.y - height / 2)
+                    invalidate()
+                    //三阶曲线控制点2
+                } else if (cubicRightRect.contains((event.x - width / 2).toInt(), (-(event.y - height / 2)).toInt())) {
+                    moveCubeXX = event.x - width / 2
+                    moveCubeYY = -(event.y - height / 2)
+                    invalidate()
+                }
             }
         }
         return true
     }
-
 }
 
 private fun getPaint(style: Paint.Style): Paint {
