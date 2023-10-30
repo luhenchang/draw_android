@@ -113,7 +113,7 @@ class PathApiView constructor(context: Context, attributeSet: AttributeSet) :
 
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         //六、 Path-线段
         //drawLine(canvas)

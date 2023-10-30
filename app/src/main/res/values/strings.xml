@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">draw_android</string>
+    <string name="title_activity_curve_view">CurveViewActivity</string>
 </resources>

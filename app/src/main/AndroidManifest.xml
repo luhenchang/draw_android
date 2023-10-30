@@ -1,74 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.draw_android">
+        package="com.example.draw_android">
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.Draw_android">
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/Theme.Draw_android">
         <activity
-            android:name=".section05_canvas.b_rotate.CanvasRotateViewActivity"
-            android:exported="true" />
-        <activity
-            android:name=".section05_canvas.a_translate.CanvasTranslateViewActivity"
-            android:exported="true" />
-        <activity
-            android:name=".section03_paint.a2_blend_modle.PaintBlendMainActivity"
-            android:exported="true" />
-        <activity
-            android:name=".section03_paint.a1_style_stroke.PaintAPIViewActivity"
-            android:exported="true" />
-        <activity
-            android:name=".section08_vertical_time_line.a_draw_vertical_time_line.DrawVerticalTimeLineActivity"
-            android:exported="true"
-            android:theme="@style/Theme.NoActionBar" />
-        <activity
-            android:name=".section07_time_line.a_draw_time_line.DrawTimeLineActivity"
-            android:exported="true"
-            android:theme="@style/Theme.NoActionBar" />
-        <activity
-            android:name=".section16_line_chart.c_stached_line_chart.StackedLineChartActivity"
-            android:exported="true"
-            android:theme="@style/Theme.NoActionBar" />
-        <activity
-            android:name=".section16_line_chart.b_basic_area_chart.BasicAreaChartActivity"
-            android:exported="true"
-            android:theme="@style/Theme.NoActionBar" />
-        <activity
-            android:name=".section16_line_chart.a_basic_line_chart.BasicLineChartActivity"
-            android:exported="true"
-            android:theme="@style/Theme.NoActionBar" />
-        <activity
-            android:name=".section01_draw.b_compose.CanvasComposeActivity"
-            android:exported="true" />
-        <activity
-            android:name=".section01_draw.a_view.CanvasViewActivity"
-            android:exported="true"
-            android:theme="@style/Theme.NoActionBar" />
-        <activity
-                android:name=".section05_canvas.c_scale.CanvasScaleViewActivity"
+                android:name=".section05_canvas.e_curve.CurveViewActivity"
                 android:exported="true"
-                android:theme="@style/Theme.NoActionBar" />
-        <activity
-            android:name=".section05_canvas.d_save_restore.CanvasSaveRestoreMainActivity"
-            android:exported="true">
-        </activity>
-        <activity
-                android:theme="@style/Theme.NoActionBar"
-                android:name=".section05_canvas_clip.a_canvas_clip.ClipCanvasMainActivity"
-                android:exported="true" />
-        <activity
-                android:theme="@style/Theme.NoActionBar"
-                android:name=".section04_path.a_path.PathApiViewActivity"
-                android:exported="true">
+                android:label="@string/title_activity_curve_view"
+                android:theme="@style/Theme.Draw_android">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+                android:name=".section05_canvas.b_rotate.CanvasRotateViewActivity"
+                android:exported="true" />
+        <activity
+                android:name=".section05_canvas.a_translate.CanvasTranslateViewActivity"
+                android:exported="true" />
+        <activity
+                android:name=".section03_paint.a2_blend_modle.PaintBlendMainActivity"
+                android:exported="true" />
+        <activity
+                android:name=".section03_paint.a1_style_stroke.PaintAPIViewActivity"
+                android:exported="true" />
+        <activity
+                android:name=".section08_vertical_time_line.a_draw_vertical_time_line.DrawVerticalTimeLineActivity"
+                android:exported="true"
+                android:theme="@style/Theme.NoActionBar" />
+        <activity
+                android:name=".section07_time_line.a_draw_time_line.DrawTimeLineActivity"
+                android:exported="true"
+                android:theme="@style/Theme.NoActionBar" />
+        <activity
+                android:name=".section16_line_chart.c_stached_line_chart.StackedLineChartActivity"
+                android:exported="true"
+                android:theme="@style/Theme.NoActionBar" />
+        <activity
+                android:name=".section16_line_chart.b_basic_area_chart.BasicAreaChartActivity"
+                android:exported="true"
+                android:theme="@style/Theme.NoActionBar" />
+        <activity
+                android:name=".section16_line_chart.a_basic_line_chart.BasicLineChartActivity"
+                android:exported="true"
+                android:theme="@style/Theme.NoActionBar" />
+        <activity
+                android:name=".section01_draw.b_compose.CanvasComposeActivity"
+                android:exported="true" />
+        <activity
+                android:name=".section01_draw.a_view.CanvasViewActivity"
+                android:exported="true"
+                android:theme="@style/Theme.NoActionBar" />
+        <activity
+                android:name=".section05_canvas.c_scale.CanvasScaleViewActivity"
+                android:exported="true"
+                android:theme="@style/Theme.NoActionBar" />
+        <activity
+                android:name=".section05_canvas.d_save_restore.CanvasSaveRestoreMainActivity"
+                android:exported="true"></activity>
+        <activity
+                android:name=".section05_canvas_clip.a_canvas_clip.ClipCanvasMainActivity"
+                android:exported="true"
+                android:theme="@style/Theme.NoActionBar" />
+        <activity
+                android:name=".section04_path.a_path.PathApiViewActivity"
+                android:exported="true"
+                android:theme="@style/Theme.NoActionBar">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 
