@@ -1,0 +1,10 @@
+[master c4409eb] 画布曲线绘制-
+ 14 files changed, 571 insertions(+), 123 deletions(-)
+ create mode 100644 .idea/jarRepositories.xml
+ rewrite app/src/main/AndroidManifest.xml (68%)
+ create mode 100644 app/src/main/java/com/example/draw_android/section05_canvas/e_curve/BaseCanvasView.kt
+ create mode 100644 app/src/main/java/com/example/draw_android/section05_canvas/e_curve/CurveView.kt
+ create mode 100644 app/src/main/java/com/example/draw_android/section05_canvas/e_curve/CurveViewActivity.kt
+ create mode 100644 app/src/main/res/layout/activity_canvas_curve_main.xml
+ rewrite build.gradle.kts (73%)
+ create mode 100644 config.gradle.kts
