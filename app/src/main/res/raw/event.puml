@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/class-diagram
+(*) -->"dispatchHoverEvent(MotionEvent event)"
+If "input is verber" then
+  --> [YES] "turn on verbosity"
+  --> "run command12"
+  --> "run command"
+else
+  --> "run command"
+Endif
+-->(*)
+@enduml

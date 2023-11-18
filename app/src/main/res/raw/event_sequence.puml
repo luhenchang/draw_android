@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber /'自动给加上序号'/
+actor Bob #red
+  ' The only defference between actor
+  ' and participant is the drawing
+  participant Alice
+  participant "I have a really \n long name" as L #FF00ff
+  participant "I have a really1 \n long name" as J #FF00ff
+
+  /' You can also declare:
+     participant L as "I have a really\nlong name" #99ff99
+    '/
+  title 标题名称【事件分发】
+alt 所有的PlantUML学习语法
+  Alice -[#red]>> Bob: Authentication Request
+  Bob <-> J: 使用 <-> 可用来绘制双向箭头。
+else 自定义标题自增模块
+  autonumber 40 10 "<font color=red>自定义序号"
+  Bob -> Alice: 右箭头实线
+  Bob --> L: 使用双横线 -- 替代 - 可以用来绘制点线。
+else 自定义自增模块
+  autonumber "<b>[000]"
+  Bob ->o L: 在箭头后面加个 o 可以在箭头前绘制一个圆圈。
+  alt 解决
+  Bob //- L: 使用 \ 或 / 来替换 < 或 > 可以让箭头只显示上半部分或下半 部分。
+  end
+else 自增增量模块
+  autonumber 40 20 /'40是基础，20是下一个序号的增量'/
+  Bob -->> L: 重复输入箭头或斜杠（ >> // ），用来绘制空心箭头。
+  note left of Bob #aqua
+         This is displayed
+         left of Alice.
+    end note
+  Bob \\[#red]-- L: 颜色虚线
+  note left: this is anther note
+  legend center
+     使用 legend 和 end legend 关键词可以设置图形的图例。
+     图例可以设 为左对齐、右对齐和居中对齐。
+  endlegend
+end
+
+@enduml

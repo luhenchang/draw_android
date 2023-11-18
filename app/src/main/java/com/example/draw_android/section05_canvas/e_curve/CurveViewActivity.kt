@@ -3,15 +3,8 @@ package com.example.draw_android.section05_canvas.e_curve
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.layout.size
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import com.example.draw_android.R
-import com.example.draw_android.section05_canvas.c_scale.CustomSwitch
 
 class CurveViewActivity : ComponentActivity() {
     private lateinit var colorViews: List<ImageView>

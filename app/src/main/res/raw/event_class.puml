@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title 路很长对：dispatchTouchEvent(MotionEvent event){...}源码分析
+start
+:dispatchTouchEvent;
+repeat
+if(boolean onFilterTouchEventForSecurity(event);) then(true)
+  if (boolean onInterceptTouchEvent(ev);) is (true) then
+    :在自身onTouchEvent as A
+    中进行事件处理。;
+    note left : 这部分内容在后ViewGroup自定义时候涉及到。
+    stop
+  else (false)
+    :循环遍历子View(children)
+    for (int i = childrenCount - 1; i >= 0; i--){
+    ...
+    };
+    if (dispatchTransformedTouchEvent(ev,child)内部判断child是否为null？) is (children = null) then
+      :super.dispatchTouchEvent(event);
+      stop
+    else (children!=null)
+      :child.dispatchTouchEvent(event);
+      if (children is ViewGroup or View) is (view) then
+        :dispatchTouchEvent->onTouchEvent()/click/longClick等者去进行消费;
+         if (自身消费?) is (yes) then
+           :super.dispatchTouchEvent = true
+           最终dispatchTouchEvent返回true
+           表示已经消费，会一直归到DecorView便完
+           成了事件分发的归流程;
+           stop
+         else (no)
+           :return super.dispatchTouchEvent(event)
+           将事件返回给父类去处理;
+         endif
+        stop
+      else (viewGroup)
+        :回到了次流程的开始dispatchTouchEvent;
+        stop
+      endif
+    endif
+  endif
+ else (不做分析)
+ stop
+endif
+
+legend left
+     签名:路很长
+endlegend
+
+@enduml

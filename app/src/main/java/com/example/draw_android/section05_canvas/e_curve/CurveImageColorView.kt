@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import com.example.draw_android.R
-import com.example.draw_android.section05_canvas.c_scale.CustomSwitch
 
 class CurveImageColorView @JvmOverloads constructor(
     context: Context,

@@ -10,15 +10,24 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.Draw_android">
         <activity
-                android:name=".section05_canvas.e_curve.CurveViewActivity"
-                android:exported="true"
-                android:label="@string/title_activity_curve_view"
-                android:theme="@style/Theme.Draw_android">
+                android:name=".section05_canvas.f_event.EventCanvasMainActivity"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+                android:name=".section05_canvas.e_curve.CurveViewActivity"
+                android:exported="true"
+                android:label="@string/title_activity_curve_view"
+                android:theme="@style/Theme.Draw_android">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
                 android:name=".section05_canvas.b_rotate.CanvasRotateViewActivity"
@@ -65,7 +74,7 @@
                 android:theme="@style/Theme.NoActionBar" />
         <activity
                 android:name=".section05_canvas.d_save_restore.CanvasSaveRestoreMainActivity"
-                android:exported="true"></activity>
+                android:exported="true" />
         <activity
                 android:name=".section05_canvas_clip.a_canvas_clip.ClipCanvasMainActivity"
                 android:exported="true"
@@ -74,11 +83,13 @@
                 android:name=".section04_path.a_path.PathApiViewActivity"
                 android:exported="true"
                 android:theme="@style/Theme.NoActionBar">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
     </application>
 

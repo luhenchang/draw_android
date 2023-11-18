@@ -297,10 +297,22 @@ class StackedLineChartView constructor(context: Context, attributeSet: Attribute
 
     private var canvasX = 0f
     private var canvasY = 0f
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        return super.dispatchTouchEvent(event)
+    }
+
+    /**
+     * 解决onTouchEvent警告⚠️
+     */
+    override fun performClick(): Boolean {
+        return super.performClick()
+    }
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 visible = true
+                performClick()
                 invalidate()
             }
             MotionEvent.ACTION_MOVE -> {
