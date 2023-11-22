@@ -7,8 +7,8 @@
         android:gravity="center"
         android:background="@color/purple_200"
         tools:context=".section05_canvas.f_event.EventCanvasMainActivity">
-    <com.example.draw_android.section05_canvas.f_event.EventXYCanvas
+    <com.example.draw_android.section05_canvas.f_event.EventScaleCanvas
             android:background="@color/white"
-            android:layout_width="300.dp"
-            android:layout_height="300.dp" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 </RelativeLayout>
