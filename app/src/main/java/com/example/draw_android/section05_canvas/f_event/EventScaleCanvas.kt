@@ -26,6 +26,7 @@ class EventScaleCanvas constructor(context: Context, attributeSet: AttributeSet)
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var oriDis: Float = 0f
     private var preScale = 1f //之前的伸缩值
+    private val SCALE_FACTOR = .5f
 
     init {
         initScaleGestureDetector()
@@ -42,8 +43,7 @@ class EventScaleCanvas constructor(context: Context, attributeSet: AttributeSet)
                 override fun onScale(detector: ScaleGestureDetector): Boolean {
                     //为了保持连续性->当前的伸缩值*之前的伸缩值
                     curScale *= detector.scaleFactor
-                    Log.e("ScaleGestureDetector", "onScale: " + detector.scaleFactor)
-                    //当放大倍数大于2或者缩小倍数小于0.1倍 就不伸
+                    //当放大倍数其最大能放大沾满屏幕宽。计算不难的。宽度/(2*100)即宽度除以直径。最大放大到沾满屏幕
                     curScale = curScale.coerceIn(0.1f, width / 2 / 100f)
                     invalidate()
                     return true
@@ -67,6 +67,7 @@ class EventScaleCanvas constructor(context: Context, attributeSet: AttributeSet)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+       // mScaleGestureDetector.onTouchEvent(event)
         when (event.action and MotionEvent.ACTION_MASK) {
             MotionEvent.ACTION_DOWN -> {
                 performClick()
@@ -88,19 +89,19 @@ class EventScaleCanvas constructor(context: Context, attributeSet: AttributeSet)
                 if (eventModeType == 2) {
                     // 获取两个手指缩放时候的之间距离
                     val newDist = distance(event)
-                    curScale *= newDist / oriDis
-                    curScale = 0.1f.coerceAtLeast(curScale.coerceAtMost(5.0f))
-//                    if (newDist > 10) {
-//                        //通过当前的距离除以上一手指按下两趾头之间的距离就为实时的缩放
-//                        curScale = (newDist / oriDis)
-//                        if (curScale >= 1) {
-//                            //curScale = preScale + (curScale-1)有助于理解，简写如下：
-//                            curScale += preScale-1
-//                        } else {
-//                            curScale = preScale - (1-curScale)
-//                        }
-//                        preScale = curScale
-//                    }
+//                    curScale *= newDist / oriDis
+//                    curScale = 0.1f.coerceAtLeast(curScale.coerceAtMost(5.0f))
+                    if (newDist > 10) {
+                        //通过当前的距离除以上一手指按下两趾头之间的距离就为实时的缩放
+                        curScale = (newDist / oriDis)
+                        if (curScale >= 1) {
+                            curScale = preScale + (curScale-1)*SCALE_FACTOR//有助于理解，简写如下：
+                            //curScale += preScale-1
+                        } else {
+                            curScale = preScale - (1-curScale)*SCALE_FACTOR
+                        }
+                        preScale = curScale
+                    }
                 }
                 //通知刷新View
                 invalidate()
