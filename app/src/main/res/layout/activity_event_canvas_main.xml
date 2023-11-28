@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:background="@color/purple_200"
         tools:context=".section05_canvas.f_event.EventCanvasMainActivity">
-    <com.example.draw_android.section05_canvas.f_event.EventScaleCanvas
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        <com.example.draw_android.section05_canvas.f_event.EventMeasurePathView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 </RelativeLayout>

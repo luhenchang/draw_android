@@ -1,6 +1,6 @@
 package com.example.draw_android.section05_canvas.f_event
 
-import android.content.ContentValues.TAG
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -8,159 +8,159 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
-import android.graphics.RectF
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
-import android.view.ScaleGestureDetector
 import android.view.View
-import androidx.viewpager.widget.ViewPager
+import android.view.animation.DecelerateInterpolator
+import androidx.core.animation.addListener
 import com.example.draw_android.R
-import kotlin.math.sqrt
 
-class EventMeasurePathView constructor(context: Context, attributeSet: AttributeSet) :
-    View(context, attributeSet) {
-    private var curScale: Float = 1f
-    private var eventModeType: Int = 1
-    private lateinit var mScaleGestureDetector: ScaleGestureDetector
-    private var isDragging = false
+class EventMeasurePathView : View {
+
+
     private var lastX = 0f
-    private var lastY = 0f
-    private lateinit var titleBox: RectF // 初始巨型框的位置和大小
+    private val bitmapPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val xfModePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
+    }
+    private val imageList = mutableListOf<Int>()
+    private val bitmapList = mutableListOf<Bitmap>()
 
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val imageList = mutableListOf<Bitmap>()
-    private var oriDis: Float = 0f
+    private val layerIdList = mutableListOf<Int>()
 
-    init {
-        // 初始化图片资源
-        //imageList.add(BitmapFactory.decodeResource(resources, R.drawable.item_bg))
-        //imageList.add(BitmapFactory.decodeResource(resources, R.drawable.item_bg_2))
-        initScaleGestureDetector()
+    constructor(context: Context) : super(context) {
+        init()
     }
 
-    private fun initScaleGestureDetector() {
-        mScaleGestureDetector = ScaleGestureDetector(
-            context,
-            object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
-                override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
-                    return true
-                }
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        init()
+    }
 
-                override fun onScale(detector: ScaleGestureDetector): Boolean {
-                    Log.e(TAG, "onScale:" + detector.scaleFactor)
-                    return false
-                }
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
+        init()
+    }
 
-                override fun onScaleEnd(detector: ScaleGestureDetector) {}
-            })
+    private fun init() {
+        // 初始化图片资源
+        imageList.add(R.drawable.phone_one)
+        imageList.add(R.drawable.phone_two)
+        imageList.add(R.drawable.phone_three)
+        imageList.add(R.drawable.phone_four)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        titleBox = RectF(0f, 0f, 100f, h.toFloat())
+        imageList.forEach {
+            // 创建与屏幕宽高相同大小的Bitmap
+            val originalBitmap = BitmapFactory.decodeResource(resources, it)
+            val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true)
+            bitmapList.add(scaledBitmap)
+        }
+
+
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         // 绘制每张图片，使其重叠在一起
-        canvas.drawBitmap(imageList[0], 0f, 0f, paint)
-        val layerId = canvas.saveLayer(0f, 0f, width.toFloat(), height.toFloat(), paint)
-        canvas.drawBitmap(imageList[1], 0f, 0f, paint)
+        bitmapList.forEach { bitmap ->
+            val layerId1 = canvas.saveLayer(0f, 0f, width.toFloat(), height.toFloat(), bitmapPaint)
+            canvas.drawBitmap(bitmap, 0f, 0f, bitmapPaint)
+            layerIdList.add(layerId1)
+        }
 
-
-        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
-        canvas.drawRect(0f, 0f, lastX, height.toFloat(), paint)
-        paint.xfermode = null
-        canvas.restoreToCount(layerId)
+        if (layerIdList.isNotEmpty()) {
+            canvas.drawRect(0f, 0f, lastX, height.toFloat(), xfModePaint)
+            canvas.restoreToCount(layerIdList.last())
+        }
     }
 
     override fun performClick(): Boolean {
         return super.performClick()
     }
 
+    private var dragModeType = false
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action and MotionEvent.ACTION_MASK) {
             MotionEvent.ACTION_DOWN -> {
-                //1.表示单点事件
-                eventModeType = 1
-            }
-
-            MotionEvent.ACTION_POINTER_DOWN -> {
-                //多点触控
-                oriDis = distance(event)
-                if (oriDis > 10f) {
-                    //2.表示多点触碰类型
-                    eventModeType = 2
+                performClick()
+                lastX = event.x
+                if (lastX < 60f) {
+                    dragModeType = true
+                    // 手指按下时，保存当前图层ID
+                    layerIdList.clear()
+                    invalidate()
                 }
-
             }
 
             MotionEvent.ACTION_MOVE -> {
-                if (eventModeType == 2) {
-                    // 获取两个手指缩放时候的之间距离
-                    val newDist = distance(event)
-                    if (newDist > 10f) {
-                        curScale = newDist / oriDis
-                    }
+                if (dragModeType) {
+                    lastX = event.x
+                    // 通知刷新View
+                    invalidate()
                 }
-                //通知刷新View
-                invalidate()
             }
 
+            MotionEvent.ACTION_CANCEL,
             MotionEvent.ACTION_UP -> {
-                eventModeType = 0
-            }
-
-            MotionEvent.ACTION_POINTER_UP -> {
-                eventModeType = 0
+                if (!dragModeType) {
+                    return true
+                }
+                dragModeType = false
+                if (lastX >= width / 2f) {
+                    //启动一个动画进行刷新页面
+                    if (layerIdList.isNotEmpty())
+                        startElasticAnimationToRight(lastX)
+                } else {
+                    startElasticAnimationToLeft(lastX)
+                }
             }
         }
         return true
     }
 
-    /**
-     * 计算两个手指间的距离
-     *
-     * @param event 触摸事件
-     * @return 放回两个手指之间的距离
-     */
-    private fun distance(event: MotionEvent): Float {
-        val x = event.getX(0) - event.getX(1)
-        val y = event.getY(0) - event.getY(1)
-        return sqrt((x * x + y * y).toDouble()).toFloat() //两点间距离公式
+    private var animator: ValueAnimator? = null
+    private fun startElasticAnimationToRight(starAnimal: Float) {
+        animator?.cancel()
+        // 设置弹性动画
+        animator = ValueAnimator.ofFloat(starAnimal, width.toFloat())
+        animator?.apply {
+            duration = 200
+            interpolator = DecelerateInterpolator()
+            addUpdateListener { animation ->
+                lastX = animation.animatedValue as Float
+                invalidate()
+            }
+            addListener(onEnd = {
+                // 手指抬起时，移除最后一个图层和对应的图片
+                lastX = 0f
+                layerIdList.removeLast()
+                bitmapList.removeLast()
+            })
+            start()
+        }
     }
 
+    private fun startElasticAnimationToLeft(starAnimal: Float) {
+        animator?.cancel()
+        // 设置弹性动画
+        animator = ValueAnimator.ofFloat(starAnimal, 0f)
+        animator?.apply {
+            duration = 200
+            interpolator = DecelerateInterpolator()
+            addUpdateListener { animation ->
+                lastX = animation.animatedValue as Float
+                invalidate()
+            }
+            addListener(onEnd = {
+                // 手指抬起时，移除最后一个图层和对应的图片
+                lastX = 0f
+            })
+            start()
+        }
+    }
 }
-//    override fun onTouchEvent(event: MotionEvent): Boolean {
-//        val x = event.x
-//        val y = event.y
-//        when (event.action) {
-//            MotionEvent.ACTION_DOWN -> {
-//                performClick()
-//                if (titleBox.contains(x, y)) {
-//                    // 按下位置在巨型框内
-//                    isDragging = true
-//                    lastX = x
-//                    lastY = y
-//                }
-//            }
-//            MotionEvent.ACTION_MOVE -> {
-//                if (isDragging) {
-//                    // 移动巨型框
-//                    val dx = x - lastX
-//                    val dy = y - lastY
-//                    titleBox.offset(dx, dy)
-//                    lastX = x
-//                    lastY = y
-//                    invalidate()
-//                }
-//            }
-//            MotionEvent.ACTION_UP -> {
-//                isDragging = false
-//            }
-//        }
-//
-//        return true
-//    }
-//}

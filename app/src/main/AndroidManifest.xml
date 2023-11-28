@@ -10,7 +10,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.Draw_android">
         <activity
-                android:name=".section05_canvas.f_event.EventCanvasMainActivity"
+                android:name=".MainActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,15 +19,18 @@
             </intent-filter>
         </activity>
         <activity
+                android:name=".section05_canvas.f_event.EventCanvasMainActivity"
+                android:exported="true" />
+        <activity
                 android:name=".section05_canvas.e_curve.CurveViewActivity"
                 android:exported="true"
                 android:label="@string/title_activity_curve_view"
                 android:theme="@style/Theme.Draw_android">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
         <activity
                 android:name=".section05_canvas.b_rotate.CanvasRotateViewActivity"

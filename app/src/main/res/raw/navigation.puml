@@ -1,0 +1,32 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+caption figure 1
+title My super title
+
+* <&flag>MainActivity
+** <&globe>NavGraph{NavHost(navController1)}
+*** composable(AppRoute.Main.route)
+**** MainScreen
+***** Scaffold bottomBar
+****** NavGraphBottom{NavHost(navController2)}
+******* HomeScreen
+******* PoliceCaseScreen
+******* NotifyScreen
+******* SmartScreen
+******* SettingScreen
+***** Scaffold content
+
+*** composable(AppRoute.Login.route)
+**** LoginScreen
+header
+My super header
+endheader
+
+center footer My super footer
+
+legend right
+  Short
+  legend
+endlegend
+@endmindmap

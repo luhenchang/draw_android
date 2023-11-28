@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="249.dp">
+
+    <RelativeLayout
+            android:layout_centerInParent="true"
+            android:background="@color/blue"
+            android:id="@+id/viewLayout"
+            android:layout_width="120.dp"
+            android:layout_height="249.dp" />
+
+    <Button
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/buttonView"
+            android:text="@string/jump_context"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+</RelativeLayout>
