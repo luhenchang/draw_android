@@ -37,6 +37,16 @@ class CustomViewAdapter(itemList: List<View>) :
                 item.requestDisallowInterceptTouchEvent(checkBox)
             }
         }
+        holder.buttonView.setOnClickListener {
+            holder.buttonView.context.startActivity(
+                Intent(
+                    holder.view.context,
+                    EventCanvasMainActivity::class.java
+                ).apply {
+                    putExtra("nameValue", position)
+                }
+            )
+        }
     }
 
     override fun getItemCount(): Int {
@@ -45,7 +55,7 @@ class CustomViewAdapter(itemList: List<View>) :
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var view: RelativeLayout
-        private var buttonView: Button
+        var buttonView: Button
         var checkInterButton: ImageView
 
 
@@ -53,16 +63,6 @@ class CustomViewAdapter(itemList: List<View>) :
             view = itemView.findViewById(R.id.viewLayout)
             buttonView = itemView.findViewById(R.id.buttonView)
             checkInterButton = itemView.findViewById(R.id.checkInterButton)
-
-
-            buttonView.setOnClickListener {
-                buttonView.context.startActivity(
-                    Intent(
-                        view.context,
-                        EventCanvasMainActivity::class.java
-                    )
-                )
-            }
         }
     }
 }

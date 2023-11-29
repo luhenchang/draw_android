@@ -32,11 +32,7 @@ class EventExampleView : View, EventDisallowInterceptListener {
         style = Paint.Style.STROKE
         strokeWidth = 5f
     }
-    private val iconPath = Path().apply {
-        moveTo(lastX-36,eventY-16)
-        lineTo(lastX-36+20,eventY)
-        lineTo(lastX-36,eventY+16)
-    }
+    private val iconPath = Path()
 
     private val imageList = mutableListOf<Int>()
     private val bitmapCacheList = mutableListOf<Bitmap>()
@@ -71,14 +67,16 @@ class EventExampleView : View, EventDisallowInterceptListener {
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        imageList.forEach {
-            // 创建与屏幕宽高相同大小的Bitmap
-            val originalBitmap = BitmapFactory.decodeResource(resources, it)
-            val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true)
-            bitmapList.add(scaledBitmap)
-            bitmapCacheList.add(scaledBitmap)
-        }
-
+        Thread {
+            imageList.forEach {
+                // 创建与屏幕宽高相同大小的Bitmap
+                val originalBitmap = BitmapFactory.decodeResource(resources, it)
+                val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true)
+                bitmapList.add(scaledBitmap)
+                bitmapCacheList.add(scaledBitmap)
+            }
+            postInvalidate()
+        }.start()
 
     }
 
@@ -129,8 +127,18 @@ class EventExampleView : View, EventDisallowInterceptListener {
             canvas.drawPath(path, xfModePaint)
             canvas.restoreToCount(layerIdList.last())
 
-            canvas.drawCircle(lastX-36, eventY, 30f, iconPaint)
-            canvas.drawPath(iconPath,iconPaint)
+            //绘制按钮
+            canvas.drawCircle(lastX - 36, eventY, 30f, iconPaint)
+            iconPath.apply {
+                moveTo(lastX - 36, eventY - 16)
+                lineTo(lastX - 36 + 20, eventY)
+                lineTo(lastX - 36, eventY + 16)
+            }.apply {
+                moveTo(lastX - 36, eventY - 16)
+                lineTo(lastX - 36 + 20, eventY)
+                lineTo(lastX - 36, eventY + 16)
+            }
+            canvas.drawPath(iconPath, iconPaint)
         }
     }
 

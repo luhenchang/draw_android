@@ -2,6 +2,7 @@ package com.example.draw_android.section05_canvas.f_event
 
 import android.graphics.RectF
 import android.os.Bundle
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -13,6 +14,10 @@ class EventCanvasMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_event_canvas_main)
+        val rootView = findViewById<RelativeLayout>(R.id.rootView)
+        val nameValue = intent.getIntExtra("nameValue",0)
+        val eventCanvasView = getVisibleView(nameValue,this)
+        rootView.addView(eventCanvasView)
     }
 
     private fun initView() {
