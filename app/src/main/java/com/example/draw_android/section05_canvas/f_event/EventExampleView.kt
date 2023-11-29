@@ -129,6 +129,7 @@ class EventExampleView : View, EventDisallowInterceptListener {
 
             //绘制按钮
             canvas.drawCircle(lastX - 36, eventY, 30f, iconPaint)
+            iconPath.reset()
             iconPath.apply {
                 moveTo(lastX - 36, eventY - 16)
                 lineTo(lastX - 36 + 20, eventY)

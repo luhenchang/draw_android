@@ -5,5 +5,5 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:id="@+id/rootView"
-        android:background="@color/purple_200"
+        android:background="@color/translate"
         tools:context=".section05_canvas.f_event.EventCanvasMainActivity"/>
