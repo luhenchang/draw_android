@@ -84,11 +84,8 @@ class RotateRotateDetector constructor(
                 }
             }
 
-            MotionEvent.ACTION_UP -> {
-                listener.onRotateEnd(this)
-                eventModeType = EventModeType.EndEvent
-            }
-
+            MotionEvent.ACTION_UP,
+            MotionEvent.ACTION_CANCEL,
             MotionEvent.ACTION_POINTER_UP -> {
                 listener.onRotateEnd(this)
                 eventModeType = EventModeType.EndEvent

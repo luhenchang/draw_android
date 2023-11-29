@@ -3,6 +3,7 @@ package com.example.draw_android.section05_canvas.f_event
 import android.graphics.RectF
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import com.example.draw_android.R
 

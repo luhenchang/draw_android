@@ -1,13 +1,16 @@
 package com.example.draw_android
 
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.draw_android.section05_canvas.f_event.EventCanvasMainActivity
+import com.example.draw_android.section05_canvas.f_event.EventDisallowInterceptListener
 
 
 class CustomViewAdapter(itemList: List<View>) :
@@ -27,6 +30,13 @@ class CustomViewAdapter(itemList: List<View>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: View = itemList[position]
         holder.view.addView(item)
+        var checkBox = false
+        holder.checkInterButton.setOnClickListener {
+            if (item is EventDisallowInterceptListener) {
+                checkBox = !checkBox
+                item.requestDisallowInterceptTouchEvent(checkBox)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -36,10 +46,14 @@ class CustomViewAdapter(itemList: List<View>) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var view: RelativeLayout
         private var buttonView: Button
+        var checkInterButton: ImageView
+
 
         init {
             view = itemView.findViewById(R.id.viewLayout)
             buttonView = itemView.findViewById(R.id.buttonView)
+            checkInterButton = itemView.findViewById(R.id.checkInterButton)
+
 
             buttonView.setOnClickListener {
                 buttonView.context.startActivity(

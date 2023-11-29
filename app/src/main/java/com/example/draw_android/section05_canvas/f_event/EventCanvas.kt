@@ -8,13 +8,26 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 
-class EventCanvas constructor(context: Context, attributeSet: AttributeSet) :
-    View(context, attributeSet) {
+class EventCanvas : View,EventDisallowInterceptListener {
     val paint = Paint().apply {
         color = Color.BLACK
         textSize = 46f
     }
     var content = "没有事件输入"
+
+    constructor(context: Context) : super(context) {
+    }
+
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
+    }
+
     override fun performClick(): Boolean {
         return super.performClick()
     }
@@ -34,6 +47,7 @@ class EventCanvas constructor(context: Context, attributeSet: AttributeSet) :
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 performClick()
+                parent?.requestDisallowInterceptTouchEvent(disallowIntercept)
                 // 按下时的处理
                 content = "ACTION_DOWN::event(x=${event.x},y=${event.y}}"
             }
@@ -61,5 +75,10 @@ class EventCanvas constructor(context: Context, attributeSet: AttributeSet) :
         invalidate()
         // 返回 false，表示不消费事件，让事件继续传递
         return true
+    }
+
+    private var disallowIntercept: Boolean = false
+    override fun requestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+        this.disallowIntercept = disallowIntercept
     }
 }

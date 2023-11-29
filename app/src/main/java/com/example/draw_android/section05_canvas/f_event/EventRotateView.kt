@@ -9,13 +9,27 @@ import android.view.MotionEvent
 import android.view.View
 import kotlin.math.atan2
 
-class EventRotateView constructor(context: Context, attributeSet: AttributeSet) :
-    View(context, attributeSet) {
+class EventRotateView  :
+    View,EventDisallowInterceptListener {
     private val paint = Paint()
     private var rotateAngle = 0f
     private var rotateDetector: RotateRotateDetector? = null
+    constructor(context: Context) : super(context) {
+        init()
+    }
 
-    init {
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        init()
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
+        init()
+    }
+    private fun init() {
         paint.color = Color.RED
         paint.style = Paint.Style.FILL
         rotateDetector =
@@ -61,6 +75,7 @@ class EventRotateView constructor(context: Context, attributeSet: AttributeSet) 
     private var eventModeType: EventModeType = EventModeType.DefaultEvent
     private var startAngle = 0f
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        parent?.requestDisallowInterceptTouchEvent(disallowIntercept)
         rotateDetector?.onTouchEvent(event)
         return true
 //        when (event.action and MotionEvent.ACTION_MASK) {
@@ -114,6 +129,11 @@ class EventRotateView constructor(context: Context, attributeSet: AttributeSet) 
         val deltaY = event.getY(1) - event.getY(0)
         val angle = atan2(deltaY.toDouble(), deltaX.toDouble())
         return Math.toDegrees(angle).toFloat()
+    }
+
+    private var disallowIntercept: Boolean = false
+    override fun requestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+        this.disallowIntercept = disallowIntercept
     }
 }
 

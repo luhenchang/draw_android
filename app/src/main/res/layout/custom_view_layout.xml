@@ -5,7 +5,6 @@
 
     <RelativeLayout
             android:layout_centerInParent="true"
-            android:background="@color/blue"
             android:id="@+id/viewLayout"
             android:layout_width="120.dp"
             android:layout_height="249.dp" />
@@ -17,4 +16,13 @@
             android:text="@string/jump_context"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+    <ImageView
+            android:layout_alignParentStart="true"
+            android:background="@drawable/battery"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/checkInterButton"
+            android:text="@string/jump_context"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/jump_context" />
 </RelativeLayout>

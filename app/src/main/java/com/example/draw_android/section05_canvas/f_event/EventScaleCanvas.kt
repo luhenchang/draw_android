@@ -17,8 +17,8 @@ import kotlin.math.abs
 import kotlin.math.sqrt
 
 
-class EventScaleCanvas constructor(context: Context, attributeSet: AttributeSet) :
-    View(context, attributeSet) {
+class EventScaleCanvas :
+    View,EventDisallowInterceptListener{
     private var curScale: Float = 1f
     private var eventModeType: Int = 1
     private lateinit var mScaleGestureDetector: ScaleGestureDetector
@@ -27,8 +27,22 @@ class EventScaleCanvas constructor(context: Context, attributeSet: AttributeSet)
     private var oriDis: Float = 0f
     private var preScale = 1f //之前的伸缩值
     private val SCALE_FACTOR = .5f
+    constructor(context: Context) : super(context) {
+        init()
+    }
 
-    init {
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        init()
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
+        init()
+    }
+    private fun init() {
         initScaleGestureDetector()
     }
 
@@ -71,6 +85,7 @@ class EventScaleCanvas constructor(context: Context, attributeSet: AttributeSet)
         when (event.action and MotionEvent.ACTION_MASK) {
             MotionEvent.ACTION_DOWN -> {
                 performClick()
+                parent?.requestDisallowInterceptTouchEvent(disallowIntercept)
                 //1.表示单点事件
                 eventModeType = 1
             }
@@ -106,11 +121,8 @@ class EventScaleCanvas constructor(context: Context, attributeSet: AttributeSet)
                 //通知刷新View
                 invalidate()
             }
-
-            MotionEvent.ACTION_UP -> {
-                eventModeType = 0
-            }
-
+            MotionEvent.ACTION_CANCEL,
+            MotionEvent.ACTION_UP,
             MotionEvent.ACTION_POINTER_UP -> {
                 eventModeType = 0
             }
@@ -146,5 +158,10 @@ class EventScaleCanvas constructor(context: Context, attributeSet: AttributeSet)
             )
         )
         return region.contains(x.toInt(), y.toInt())
+    }
+
+    private var disallowIntercept: Boolean = false
+    override fun requestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+        this.disallowIntercept = disallowIntercept
     }
 }

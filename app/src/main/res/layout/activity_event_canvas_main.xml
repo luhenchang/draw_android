@@ -6,7 +6,9 @@
         android:gravity="center"
         android:background="@color/purple_200"
         tools:context=".section05_canvas.f_event.EventCanvasMainActivity">
-        <com.example.draw_android.section05_canvas.f_event.EventMeasurePathView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+
+    <com.example.draw_android.section05_canvas.f_event.EventExampleView
+            android:id="@+id/eventView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 </RelativeLayout>
