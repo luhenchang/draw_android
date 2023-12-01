@@ -9,6 +9,8 @@ sealed class ViewName(val value: Int) {
     object EventScaleCanvas : ViewName(2)
     object EventRotateView : ViewName(3)
     object EventExample : ViewName(4)
+    object EventBitmapExample : ViewName(5)
+
 }
 
 fun getVisibleView(viewName: Int, context: Context): View {
@@ -18,6 +20,7 @@ fun getVisibleView(viewName: Int, context: Context): View {
         ViewName.EventScaleCanvas.value -> EventScaleCanvas(context)
         ViewName.EventRotateView.value -> EventRotateView(context)
         ViewName.EventExample.value -> EventExampleView(context)
+        ViewName.EventBitmapExample.value -> BitmapClippingView(context)
         else -> {
             View(context)
         }

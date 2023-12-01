@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.draw_android.section05_canvas.f_event.BitmapClippingView
 import com.example.draw_android.section05_canvas.f_event.EventCanvas
 import com.example.draw_android.section05_canvas.f_event.EventExampleView
 import com.example.draw_android.section05_canvas.f_event.EventRotateView
@@ -20,12 +21,14 @@ class MainActivity : AppCompatActivity() {
         val eventScaleCanvas = EventScaleCanvas(this)
         val eventRotateCanvas = EventRotateView(this)
         val eventExample = EventExampleView(this)
+        val eventBitmap = BitmapClippingView(this)
         val itemList = arrayListOf(
             eventCanvas,
             eventXYCanvas,
             eventScaleCanvas,
             eventRotateCanvas,
-            eventExample
+            eventExample,
+            eventBitmap
         )
         // 创建并设置适配器
         val adapter = CustomViewAdapter(itemList)
