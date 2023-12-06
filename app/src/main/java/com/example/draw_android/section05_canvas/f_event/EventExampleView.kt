@@ -27,6 +27,20 @@ class EventExampleView : View, EventDisallowInterceptListener {
     private val xfModePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
     }
+
+    private val shadowLinePaint = Paint().apply {
+        strokeWidth =2f
+        color = Color.parseColor("#907F7C7C")
+        style = Paint.Style.STROKE
+        setShadowLayer(10f,5f,0f,Color.BLACK)
+    }
+    private val shadowPaint = Paint().apply {
+        strokeWidth =40f
+        color = Color.TRANSPARENT
+        style = Paint.Style.STROKE
+        setShadowLayer(80f,-80f,0f,Color.BLACK)
+    }
+
     private val iconPaint = Paint().apply {
         color = Color.WHITE
         style = Paint.Style.STROKE
@@ -40,6 +54,9 @@ class EventExampleView : View, EventDisallowInterceptListener {
 
     private val layerIdList = mutableListOf<Int>()
     var path = Path()
+    var shadowPath = Path()
+    var shadowRightPath = Path()
+
 
     constructor(context: Context) : super(context) {
         init()
@@ -61,8 +78,8 @@ class EventExampleView : View, EventDisallowInterceptListener {
         // 初始化图片资源
         imageList.add(R.drawable.phone_one)
         imageList.add(R.drawable.phone_two)
-        imageList.add(R.drawable.phone_three)
-        imageList.add(R.drawable.phone_four)
+        imageList.add(R.drawable.shu_img_tow)
+        imageList.add(R.drawable.shu_img)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -126,6 +143,75 @@ class EventExampleView : View, EventDisallowInterceptListener {
             }
             canvas.drawPath(path, xfModePaint)
             canvas.restoreToCount(layerIdList.last())
+
+            shadowPath.reset()
+            shadowPath.apply {
+                val offsetEventX = 150f
+                val offsetEventY = 100f
+
+                val changeStarY = (eventY - offsetEventY) - height / 2 * scale
+                val changeEndY = (eventY + offsetEventY) + height / 2 * scale
+                lineTo(lastX - offsetEventX, 0f)
+                lineTo(lastX - offsetEventX, changeStarY)
+
+
+                cubicTo(
+                    lastX - offsetEventX,
+                    eventY - offsetEventY,
+                    lastX,
+                    eventY - offsetEventY,
+                    lastX,
+                    eventY
+                )
+                cubicTo(
+                    lastX,
+                    eventY + offsetEventY,
+                    lastX - offsetEventX,
+                    eventY + offsetEventY,
+                    lastX - offsetEventX,
+                    changeEndY
+                )
+
+                lineTo(lastX - offsetEventX, height.toFloat())
+                lineTo(0f, height.toFloat())
+            }
+
+            canvas.drawPath(shadowPath, shadowPaint)
+
+            shadowRightPath.reset()
+            shadowRightPath.apply {
+                val offsetEventX = 150f
+                val offsetEventY = 100f
+
+                val changeStarY = (eventY - offsetEventY) - height / 2 * scale
+                val changeEndY = (eventY + offsetEventY) + height / 2 * scale
+                lineTo(lastX - offsetEventX, 0f)
+                lineTo(lastX - offsetEventX, changeStarY)
+
+
+                cubicTo(
+                    lastX - offsetEventX,
+                    eventY - offsetEventY,
+                    lastX,
+                    eventY - offsetEventY,
+                    lastX,
+                    eventY
+                )
+                cubicTo(
+                    lastX,
+                    eventY + offsetEventY,
+                    lastX - offsetEventX,
+                    eventY + offsetEventY,
+                    lastX - offsetEventX,
+                    changeEndY
+                )
+
+                lineTo(lastX - offsetEventX, height.toFloat())
+                lineTo(0f, height.toFloat())
+                close()
+            }
+            canvas.drawPath(shadowRightPath, shadowLinePaint)
+
 
             //绘制按钮
             canvas.drawCircle(lastX - 36, eventY, 30f, iconPaint)
