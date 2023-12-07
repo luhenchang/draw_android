@@ -8,8 +8,11 @@ sealed class ViewName(val value: Int) {
     object EventXYCanvas : ViewName(1)
     object EventScaleCanvas : ViewName(2)
     object EventRotateView : ViewName(3)
-    object EventExample : ViewName(4)
-    object EventBitmapExample : ViewName(5)
+    object PorterDuffDstOutView : ViewName(4)
+    object PageTurnView : ViewName(5)
+
+    object EventExample : ViewName(6)
+    object EventBitmapExample : ViewName(7)
 
 }
 
@@ -19,6 +22,8 @@ fun getVisibleView(viewName: Int, context: Context): View {
         ViewName.EventXYCanvas.value -> EventXYCanvas(context)
         ViewName.EventScaleCanvas.value -> EventScaleCanvas(context)
         ViewName.EventRotateView.value -> EventRotateView(context)
+        ViewName.PorterDuffDstOutView.value -> PorterDuffDstOutView(context)
+        ViewName.PageTurnView.value -> PageTurnView(context)
         ViewName.EventExample.value -> EventExampleView(context)
         ViewName.EventBitmapExample.value -> BitmapClippingView(context)
         else -> {

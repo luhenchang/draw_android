@@ -143,7 +143,6 @@ class EventExampleView : View, EventDisallowInterceptListener {
             }
             canvas.drawPath(path, xfModePaint)
             canvas.restoreToCount(layerIdList.last())
-
             shadowPath.reset()
             shadowPath.apply {
                 val offsetEventX = 150f

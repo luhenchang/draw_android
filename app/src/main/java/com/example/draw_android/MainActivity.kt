@@ -10,6 +10,8 @@ import com.example.draw_android.section05_canvas.f_event.EventExampleView
 import com.example.draw_android.section05_canvas.f_event.EventRotateView
 import com.example.draw_android.section05_canvas.f_event.EventScaleCanvas
 import com.example.draw_android.section05_canvas.f_event.EventXYCanvas
+import com.example.draw_android.section05_canvas.f_event.PageTurnView
+import com.example.draw_android.section05_canvas.f_event.PorterDuffDstOutView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,13 +22,17 @@ class MainActivity : AppCompatActivity() {
         val eventXYCanvas = EventXYCanvas(this)
         val eventScaleCanvas = EventScaleCanvas(this)
         val eventRotateCanvas = EventRotateView(this)
+        val pageTurnView = PageTurnView(this)
         val eventExample = EventExampleView(this)
+        val eventPorterDuffDstOutView = PorterDuffDstOutView(this)
         val eventBitmap = BitmapClippingView(this)
         val itemList = arrayListOf(
             eventCanvas,
             eventXYCanvas,
             eventScaleCanvas,
             eventRotateCanvas,
+            eventPorterDuffDstOutView,
+            pageTurnView,
             eventExample,
             eventBitmap
         )
