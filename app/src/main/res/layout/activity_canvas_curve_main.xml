@@ -10,7 +10,20 @@
     <!--        <com.example.draw_android.section05_canvas.e_curve.CurveView-->
     <!--                android:layout_width="match_parent"-->
     <!--                android:layout_height="match_parent" />-->
+    <com.example.draw_android.section05_canvas.BitmapMeshView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    <com.example.draw_android.section05_canvas.RippleLayout
+            android:background="@drawable/mash_example"
+            android:layout_width="300.dp"
+            android:layout_height="300.dp"/>
+    <com.example.draw_android.section05_canvas.DrawBitmapView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     <com.example.draw_android.section05_canvas.e_curve.CurveImageColorView
+            android:visibility="gone"
             android:id="@+id/curveImgView"
             android:layout_weight="1"
             android:layout_width="match_parent"

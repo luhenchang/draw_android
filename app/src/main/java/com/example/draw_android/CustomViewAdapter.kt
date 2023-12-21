@@ -29,6 +29,9 @@ class CustomViewAdapter(itemList: List<View>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: View = itemList[position]
+        if (item.parent!=null){
+            (item.parent as ViewGroup).removeView(item)
+        }
         holder.view.addView(item)
         var checkBox = false
         holder.checkInterButton.setOnClickListener {

@@ -88,6 +88,7 @@ class EventExampleView : View, EventDisallowInterceptListener {
             imageList.forEach {
                 // 创建与屏幕宽高相同大小的Bitmap
                 val originalBitmap = BitmapFactory.decodeResource(resources, it)
+                //缩放为屏幕大小的bitmap
                 val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true)
                 bitmapList.add(scaledBitmap)
                 bitmapCacheList.add(scaledBitmap)
@@ -102,7 +103,7 @@ class EventExampleView : View, EventDisallowInterceptListener {
         val scale = lastX / width
         // 绘制每张图片，使其重叠在一起
         bitmapList.forEach { bitmap ->
-            val layerId1 = canvas.saveLayer(0f, 0f, width.toFloat(), height.toFloat(), bitmapPaint)
+            val layerId1 =  canvas.saveLayer(0f, 0f, width.toFloat(), height.toFloat(), bitmapPaint)
             canvas.drawBitmap(bitmap, 0f, 0f, bitmapPaint)
             layerIdList.add(layerId1)
         }

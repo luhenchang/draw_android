@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         package="com.example.draw_android">
 
     <application
@@ -25,12 +26,13 @@
                 android:name=".section05_canvas.e_curve.CurveViewActivity"
                 android:exported="true"
                 android:label="@string/title_activity_curve_view"
-                android:theme="@style/Theme.Draw_android">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
+                android:theme="@style/Theme.Draw_android"
+                tools:ignore="DiscouragedApi">
+<!--                        <intent-filter>-->
+<!--                            <action android:name="android.intent.action.MAIN" />-->
 
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
+<!--                            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                        </intent-filter>-->
         </activity>
         <activity
                 android:name=".section05_canvas.b_rotate.CanvasRotateViewActivity"

@@ -2,6 +2,8 @@ package com.example.draw_android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.media.session.MediaControllerCompat
+import android.widget.MediaController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.draw_android.section05_canvas.f_event.BitmapClippingView
@@ -14,6 +16,7 @@ import com.example.draw_android.section05_canvas.f_event.PageTurnView
 import com.example.draw_android.section05_canvas.f_event.PorterDuffDstOutView
 
 class MainActivity : AppCompatActivity() {
+    val ahah: MediaControllerCompat? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
