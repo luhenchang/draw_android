@@ -1,9 +1,21 @@
 package com.example.draw_android
 
-import androidx.appcompat.app.AppCompatActivity
+import android.Manifest
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Rect
 import android.os.Bundle
+import android.os.Environment
+import android.os.Handler
+import android.os.Looper
 import android.support.v4.media.session.MediaControllerCompat
-import android.widget.MediaController
+import android.util.Log
+import android.view.PixelCopy
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.draw_android.section05_canvas.f_event.BitmapClippingView
@@ -14,12 +26,44 @@ import com.example.draw_android.section05_canvas.f_event.EventScaleCanvas
 import com.example.draw_android.section05_canvas.f_event.EventXYCanvas
 import com.example.draw_android.section05_canvas.f_event.PageTurnView
 import com.example.draw_android.section05_canvas.f_event.PorterDuffDstOutView
+import com.example.draw_android.section05_canvas.f_event.ScreenImageView
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+
 
 class MainActivity : AppCompatActivity() {
     val ahah: MediaControllerCompat? = null
+    private val requestReadMediaPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { _ ->
+
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val topView:LinearLayout = findViewById(R.id.topView)
+        topView.post {
+            val rect  = Rect()
+            topView.getLocalVisibleRect(rect)
+            Log.e("topView:Top=",topView.top.toString())
+            Log.e("topView:Bottom=",topView.bottom.toString())
+            Log.e("topView:height=",topView.height.toString())
+            Log.e("topView:Bottom=",topView.bottom.toString())
+            Log.e("topView:Left=",topView.left.toString())
+            Log.e("topView:right=",topView.right.toString())
+            Log.e("topView:width=",topView.width.toString())
+            val rectLx = Rect(0,0,1080,90)
+
+
+        }
+        requestReadMediaPermissionLauncher.launch(
+            arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+        )
+
         val recyclerView: RecyclerView = findViewById(R.id.rvView)
         val eventCanvas = EventCanvas(this)
         val eventXYCanvas = EventXYCanvas(this)
@@ -44,5 +88,74 @@ class MainActivity : AppCompatActivity() {
         recyclerView.setAdapter(adapter)
         // 设置布局管理器
         recyclerView.setLayoutManager(LinearLayoutManager(this))
+
+        recyclerView.postDelayed({
+            screenCaptureNoStatusBar()
+        }, 6000)
+
+        val imgView = findViewById<ScreenImageView>(R.id.imgView)
     }
+
+    /**
+     * 截取当前可见范围屏幕（不包含状态栏）
+     */
+    private fun screenCaptureNoStatusBar() {
+        val view = window.decorView
+        view.setDrawingCacheEnabled(true)
+        view.buildDrawingCache()
+
+        // 获取状态栏高度
+        val rect = Rect()
+        view.getWindowVisibleDisplayFrame(rect)
+        val statusBarH: Int = rect.top
+        // 获取屏幕宽高
+        val w = view.width
+        val h = view.height
+        Log.e("screen:width=",w.toString())//1080
+        Log.e("screen:height=",(h - statusBarH).toString())//2352
+
+
+        // 去掉状态栏
+        val bitmap = Bitmap.createBitmap(view.drawingCache, 0, statusBarH, w, h - statusBarH)
+        // 销毁缓存信息
+        view.destroyDrawingCache()
+        updateImageCapture(bitmap)
+    }
+
+    private fun updateImageCapture(bitmap: Bitmap) {
+        // 指定文件路径和名称
+        val filePath =
+            getExternalFilesDir(null)?.absolutePath + "/cap_images.jpg"
+        Log.e("filePath==",filePath.toString())
+        val file = File(filePath)
+        // 创建输出流
+        var outputStream: FileOutputStream? = null
+        try {
+            // 打开文件输出流
+            outputStream = FileOutputStream(file)
+
+            // 将Bitmap压缩并写入输出流
+            // 第一个参数是压缩的格式，第二个参数是压缩质量，第三个参数是输出流
+            // 这里将Bitmap以JPEG格式写入，可以根据需要选择其他格式
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+
+            // 刷新输出流
+            outputStream.flush()
+
+            // 文件保存成功
+        } catch (e: IOException) {
+            Log.e("e::", e.message.toString())
+            e.printStackTrace()
+            // 文件保存失败
+        } finally {
+            // 确保关闭输出流
+            try {
+                outputStream?.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+
 }

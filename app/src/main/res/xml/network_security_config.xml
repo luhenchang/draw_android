@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!--开发中可以考虑使用-->
+    <!--Android API 28 关闭HTTPS服务器监测-->
+    <base-config cleartextTrafficPermitted="true" />
+
+    <!--实际部署后只放开自己的服务端地址-->
+    <!--只将本服务XXX.XXX.XXX.XXX器放开-->
+    <!--    <domain-config cleartextTrafficPermitted="true">-->
+    <!--        <domain includeSubdomains="true">XXX.XXX.XXX.XXX</domain>-->
+    <!--    </domain-config>-->
+</network-security-config>

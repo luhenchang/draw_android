@@ -10,6 +10,7 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
+import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -23,6 +24,8 @@ class EventExampleView : View, EventDisallowInterceptListener {
 
     private var lastX = 0f
     private var eventY = 0f
+    private val blueRect = Rect(0, 0, 200, height)
+
     private val bitmapPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val xfModePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
@@ -78,12 +81,13 @@ class EventExampleView : View, EventDisallowInterceptListener {
         // 初始化图片资源
         imageList.add(R.drawable.phone_one)
         imageList.add(R.drawable.phone_two)
-        imageList.add(R.drawable.shu_img_tow)
-        imageList.add(R.drawable.shu_img)
+        imageList.add(R.drawable.phone_three)
+        imageList.add(R.drawable.phone_four)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
+        blueRect.bottom = h
         Thread {
             imageList.forEach {
                 // 创建与屏幕宽高相同大小的Bitmap
