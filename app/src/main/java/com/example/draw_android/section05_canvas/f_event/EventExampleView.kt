@@ -269,13 +269,13 @@ class EventExampleView : View, EventDisallowInterceptListener {
                 if (!dragModeType) {
                     return true
                 }
-                dragModeType = false
+                dragModeType = false//恢复拖动初始化为false，表示未拖动，直到下次按下符合条件的地方。
                 if (lastX >= width / 2f) {
                     //启动一个动画进行刷新页面
                     if (layerIdList.isNotEmpty())
-                        startElasticAnimationToRight(lastX)
+                        startElasticAnimationToRight(lastX)//当手势抬起，如果滑动距离超过屏幕的一半，自动执行动画执行动画切换
                 } else {
-                    startElasticAnimationToLeft(lastX)
+                    startElasticAnimationToLeft(lastX)//当手势抬起，如果滑动距离没超过屏幕的一半，自动执行动画执行复原动画切换
                 }
             }
         }
