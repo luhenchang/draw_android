@@ -1,23 +1,21 @@
 package com.example.draw_android
 
 import android.Manifest
-import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Rect
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.os.Handler
-import android.os.Looper
-import android.support.v4.media.session.MediaControllerCompat
+import android.provider.Settings
 import android.util.Log
-import android.view.PixelCopy
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.draw_android.section05_canvas.TitleTextWindow
+import com.example.draw_android.section05_canvas.e_curve.CurveView
 import com.example.draw_android.section05_canvas.f_event.BitmapClippingView
 import com.example.draw_android.section05_canvas.f_event.EventCanvas
 import com.example.draw_android.section05_canvas.f_event.EventExampleView
@@ -33,7 +31,6 @@ import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
-    val ahah: MediaControllerCompat? = null
     private val requestReadMediaPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { _ ->
 
@@ -42,6 +39,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + this.packageName)
+            )
+            this.startActivity(intent)
+        }
+
         val topView:LinearLayout = findViewById(R.id.topView)
         topView.post {
             val rect  = Rect()
@@ -73,6 +78,8 @@ class MainActivity : AppCompatActivity() {
         val eventExample = EventExampleView(this)
         val eventPorterDuffDstOutView = PorterDuffDstOutView(this)
         val eventBitmap = BitmapClippingView(this)
+        val curveView = CurveView(this)
+
         val itemList = arrayListOf(
             eventCanvas,
             eventXYCanvas,
@@ -81,7 +88,8 @@ class MainActivity : AppCompatActivity() {
             eventPorterDuffDstOutView,
             pageTurnView,
             eventExample,
-            eventBitmap
+            eventBitmap,
+            curveView
         )
         // 创建并设置适配器
         val adapter = CustomViewAdapter(itemList)
@@ -96,6 +104,10 @@ class MainActivity : AppCompatActivity() {
         val imgView = findViewById<ScreenImageView>(R.id.imgView)
     }
 
+    override fun onResume() {
+        super.onResume()
+        startForegroundService(Intent(this,OverLayerService::class.java))
+    }
     /**
      * 截取当前可见范围屏幕（不包含状态栏）
      */

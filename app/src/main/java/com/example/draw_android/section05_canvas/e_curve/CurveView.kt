@@ -2,22 +2,25 @@ package com.example.draw_android.section05_canvas.e_curve
 
 import android.content.Context
 import android.graphics.*
+import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.MotionEvent.ACTION_DOWN
 import android.view.MotionEvent.ACTION_MOVE
 import android.view.View
+import kotlin.math.max
 import kotlin.math.pow
 import kotlin.math.sqrt
 
 /**
- * Created by wang fei on 2022/4/21.
+ * Created by wang fei on 2022/12/27.
  */
-class CurveView constructor(context: Context, attributeSet: AttributeSet) :
-    View(context, attributeSet) {
+class CurveView :
+    View {
 
-    private lateinit var controlRect: Rect
+    private var controlRect: Rect = Rect()
 
     //网格的宽度
     private var mWidth = 0
@@ -37,6 +40,16 @@ class CurveView constructor(context: Context, attributeSet: AttributeSet) :
         mHeight = h
         rect = RectF(0f, 0f, width.toFloat(), width.toFloat())
     }
+
+    constructor(context: Context) : super(context)
+
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -129,10 +142,10 @@ class CurveView constructor(context: Context, attributeSet: AttributeSet) :
     }
 
     //三阶控制点
-    private lateinit var cubicLeftRect: Rect
+    private var cubicLeftRect = Rect()
 
     //三阶控制点
-    private lateinit var cubicRightRect: Rect
+    private var cubicRightRect = Rect()
     private var moveCubeX: Float = 80f
     private var moveCubeY: Float = 80f
     private var moveCubeXX: Float = 240f
@@ -170,22 +183,35 @@ class CurveView constructor(context: Context, attributeSet: AttributeSet) :
             ACTION_DOWN,
             ACTION_MOVE -> {
                 //在控制点附近范围内部,进行移动
-                Log.e("x=", "onTouchEvent: (x,y)" + (event.x - width / 2).toInt() + ":" + (-(event.y - height / 2)).toInt()
+                Log.e(
+                    "x=",
+                    "onTouchEvent: (x,y)" + (event.x - width / 2).toInt() + ":" + (-(event.y - height / 2)).toInt()
                 )
                 //二阶曲线
-                if (controlRect.contains((event.x - width / 2).toInt(), (-(event.y - height / 2)).toInt())
+                if (controlRect.contains(
+                        (event.x - width / 2).toInt(),
+                        (-(event.y - height / 2)).toInt()
+                    )
                 ) {
                     Log.e("点击来", "对")
                     moveX = event.x - width / 2
                     moveY = -(event.y - height / 2)
                     invalidate()
                     //三阶曲线控制点1
-                } else if (cubicLeftRect.contains((event.x - width / 2).toInt(), (-(event.y - height / 2)).toInt())) {
+                } else if (cubicLeftRect.contains(
+                        (event.x - width / 2).toInt(),
+                        (-(event.y - height / 2)).toInt()
+                    )
+                ) {
                     moveCubeX = event.x - width / 2
                     moveCubeY = -(event.y - height / 2)
                     invalidate()
                     //三阶曲线控制点2
-                } else if (cubicRightRect.contains((event.x - width / 2).toInt(), (-(event.y - height / 2)).toInt())) {
+                } else if (cubicRightRect.contains(
+                        (event.x - width / 2).toInt(),
+                        (-(event.y - height / 2)).toInt()
+                    )
+                ) {
                     moveCubeXX = event.x - width / 2
                     moveCubeYY = -(event.y - height / 2)
                     invalidate()
