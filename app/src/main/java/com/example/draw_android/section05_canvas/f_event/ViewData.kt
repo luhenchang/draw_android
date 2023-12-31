@@ -2,6 +2,7 @@ package com.example.draw_android.section05_canvas.f_event
 
 import android.content.Context
 import android.view.View
+import com.example.draw_android.section05_canvas.e_curve.CurveExampleView
 import com.example.draw_android.section05_canvas.e_curve.CurveView
 
 sealed class ViewName(val value: Int) {
@@ -15,6 +16,7 @@ sealed class ViewName(val value: Int) {
     object EventExample : ViewName(6)
     object EventBitmapExample : ViewName(7)
     object CurveView:ViewName(8)
+    object CurveExampleView:ViewName(9)
 
 }
 
@@ -29,6 +31,7 @@ fun getVisibleView(viewName: Int, context: Context): View {
         ViewName.EventExample.value -> EventExampleView(context)
         ViewName.EventBitmapExample.value -> BitmapClippingView(context)
         ViewName.CurveView.value->CurveView(context)
+        ViewName.CurveExampleView.value->CurveExampleView(context)
         else -> {
             View(context)
         }

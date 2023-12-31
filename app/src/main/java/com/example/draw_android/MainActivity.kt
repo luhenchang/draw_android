@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.draw_android.section05_canvas.TitleTextWindow
+import com.example.draw_android.section05_canvas.e_curve.CurveExampleView
 import com.example.draw_android.section05_canvas.e_curve.CurveView
 import com.example.draw_android.section05_canvas.f_event.BitmapClippingView
 import com.example.draw_android.section05_canvas.f_event.EventCanvas
@@ -79,6 +80,9 @@ class MainActivity : AppCompatActivity() {
         val eventPorterDuffDstOutView = PorterDuffDstOutView(this)
         val eventBitmap = BitmapClippingView(this)
         val curveView = CurveView(this)
+        val curveViewExample = CurveExampleView(this)
+
+
 
         val itemList = arrayListOf(
             eventCanvas,
@@ -89,7 +93,8 @@ class MainActivity : AppCompatActivity() {
             pageTurnView,
             eventExample,
             eventBitmap,
-            curveView
+            curveView,
+            curveViewExample
         )
         // 创建并设置适配器
         val adapter = CustomViewAdapter(itemList)
