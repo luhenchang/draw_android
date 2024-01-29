@@ -3,4 +3,10 @@
     <declare-styleable name="CurveImageColorView">
         <attr name="defImg" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="CurvedBottomView">
+        <attr name="curvedStartY" format="dimension" />
+        <attr name="curvedControllerY" format="dimension" />
+        <attr name="customBackground" format="reference|color" />
+    </declare-styleable>
 </resources>

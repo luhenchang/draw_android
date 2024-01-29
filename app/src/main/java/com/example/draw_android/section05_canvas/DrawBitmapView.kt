@@ -14,6 +14,8 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import com.example.draw_android.R
+import java.util.Objects
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 class DrawBitmapView : View {
     //判断是否撞击

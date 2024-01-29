@@ -14,7 +14,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.draw_android.section05_canvas.TitleTextWindow
 import com.example.draw_android.section05_canvas.e_curve.CurveExampleView
 import com.example.draw_android.section05_canvas.e_curve.CurveView
 import com.example.draw_android.section05_canvas.f_event.BitmapClippingView
@@ -26,6 +25,9 @@ import com.example.draw_android.section05_canvas.f_event.EventXYCanvas
 import com.example.draw_android.section05_canvas.f_event.PageTurnView
 import com.example.draw_android.section05_canvas.f_event.PorterDuffDstOutView
 import com.example.draw_android.section05_canvas.f_event.ScreenImageView
+import com.example.draw_android.section05_canvas.g_clip.CircleImageView
+import com.example.draw_android.section16_line_chart.TaskManagement
+import com.example.draw_android.section16_line_chart.objectMapper
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -40,6 +42,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val taskManagement = TaskManagement(id = 1, taskName = "Example Task")
+        val jsonString = objectMapper.writeValueAsString(taskManagement)
+        println(jsonString)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
             val intent = Intent(
                 Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -60,8 +65,11 @@ class MainActivity : AppCompatActivity() {
             Log.e("topView:right=",topView.right.toString())
             Log.e("topView:width=",topView.width.toString())
             val rectLx = Rect(0,0,1080,90)
-
-
+//            File(externalCacheDir, "demo.jpg").path
+//            ClipImageMainActivity.prepare()
+//                .aspectX(3).aspectY(2)
+//                .inputPath("").outputPath("")
+//                .startForResult(this, 10001)
         }
         requestReadMediaPermissionLauncher.launch(
             arrayOf(
@@ -81,6 +89,7 @@ class MainActivity : AppCompatActivity() {
         val eventBitmap = BitmapClippingView(this)
         val curveView = CurveView(this)
         val curveViewExample = CurveExampleView(this)
+        val clipAPIStudyView = CircleImageView(this)
 
 
 
@@ -94,7 +103,8 @@ class MainActivity : AppCompatActivity() {
             eventExample,
             eventBitmap,
             curveView,
-            curveViewExample
+            curveViewExample,
+            clipAPIStudyView
         )
         // 创建并设置适配器
         val adapter = CustomViewAdapter(itemList)

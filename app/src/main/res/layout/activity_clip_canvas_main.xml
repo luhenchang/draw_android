@@ -1,13 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ff00ff"
-    tools:context=".section05_canvas_clip.a_canvas_clip.ClipCanvasMainActivity">
-
-    <com.example.draw_android.section05_canvas_clip.a_canvas_clip.ClipCanvasView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/bg_color"
+        tools:context=".section05_canvas_clip.a_canvas_clip.ClipCanvasMainActivity">
+
+    <com.example.draw_android.section05_canvas_clip.a_canvas_clip.CurvedBottomView
+            android:layout_width="match_parent"
+            android:background="@color/translate"
+            android:layout_height="200dp"
+            app:customBackground="@drawable/img_lp"
+            app:curvedControllerY="230dp"
+            app:curvedStartY="160dp" />
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/top_card"
+            android:layout_width="match_parent"
+            android:layout_marginTop="100dp"
+            android:layout_height="110dp"
+            android:layout_marginHorizontal="16dp"
+            app:cardBackgroundColor="@color/bg_card_color"
+            app:cardCornerRadius="10dp">
+
+        <LinearLayout
+                android:padding="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <com.example.draw_android.section05_canvas_clip.a_canvas_clip.ClipHeadView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+    <com.example.draw_android.section05_canvas_clip.a_canvas_clip.ClipHeadView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 </RelativeLayout>

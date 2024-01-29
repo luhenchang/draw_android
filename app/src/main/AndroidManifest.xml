@@ -100,7 +100,8 @@
         <activity
                 android:name=".section05_canvas_clip.a_canvas_clip.ClipCanvasMainActivity"
                 android:exported="true"
-                android:theme="@style/Theme.NoActionBar" />
+                android:theme="@style/Theme.NoActionBar" >
+        </activity>
         <activity
                 android:name=".section04_path.a_path.PathApiViewActivity"
                 android:exported="true"

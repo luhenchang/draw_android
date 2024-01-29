@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import com.example.draw_android.section05_canvas.e_curve.CurveExampleView
 import com.example.draw_android.section05_canvas.e_curve.CurveView
+import com.example.draw_android.section05_canvas.g_clip.CircleImageView
 
 sealed class ViewName(val value: Int) {
     object EventCanvas : ViewName(0)
@@ -17,6 +18,7 @@ sealed class ViewName(val value: Int) {
     object EventBitmapExample : ViewName(7)
     object CurveView:ViewName(8)
     object CurveExampleView:ViewName(9)
+    object ClipAPIStudyView:ViewName(10)
 
 }
 
@@ -32,6 +34,7 @@ fun getVisibleView(viewName: Int, context: Context): View {
         ViewName.EventBitmapExample.value -> BitmapClippingView(context)
         ViewName.CurveView.value->CurveView(context)
         ViewName.CurveExampleView.value->CurveExampleView(context)
+        ViewName.ClipAPIStudyView.value->CircleImageView(context)
         else -> {
             View(context)
         }

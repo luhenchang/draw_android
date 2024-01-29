@@ -2,12 +2,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:background="@color/purple_200"
         android:layout_height="match_parent">
 
-    <com.example.draw_android.section05_canvas.e_curve.CurveExampleView
+    <com.example.draw_android.section05_canvas.g_clip.CustomImageView
+            android:visibility="gone"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp" />
+    <com.example.draw_android.section05_canvas_clip.a_canvas_clip.ClipClockView
             android:layout_width="match_parent"
-            android:layout_height="220.dp" />
+            android:layout_height="match_parent"/>
 
     <LinearLayout
             android:visibility="gone"
@@ -28,7 +33,8 @@
                 android:id="@+id/topView"
                 android:background="@color/red"
                 android:layout_width="match_parent"
-                android:layout_height="30.dp" />
+                android:layout_height="30.dp"
+                android:orientation="horizontal" />
 
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_weight="1"

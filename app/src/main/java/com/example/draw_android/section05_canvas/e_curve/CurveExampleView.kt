@@ -10,6 +10,7 @@ import android.graphics.Path
 import android.graphics.PointF
 import android.graphics.Rect
 import android.graphics.RectF
+import android.graphics.Region
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -61,7 +62,7 @@ class CurveExampleView :
         //去闭合曲线
         pathClip.lineTo(width.toFloat(), 0f)
         pathClip.close()
-        canvas.clipPath(pathClip)
+        canvas.clipPath(pathClip, Region.Op.DIFFERENCE)
         canvas.drawBitmap(bitmap,Rect(0,0,bitmap.width,bitmap.height),Rect(0,0,width,height),paint)
 
     }
