@@ -9,4 +9,12 @@
         <attr name="curvedControllerY" format="dimension" />
         <attr name="customBackground" format="reference|color" />
     </declare-styleable>
+
+    <declare-styleable name="BottomBarNavigationView">
+        <attr name="icons" format="reference" />
+        <attr name="iconSize" format="dimension" />
+        <attr name="cubicMargin" format="dimension" />
+        <attr name="circleRadius" format="dimension" />
+        <attr name="bgColor" format="color" />
+    </declare-styleable>
 </resources>

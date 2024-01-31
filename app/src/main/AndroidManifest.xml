@@ -30,11 +30,7 @@
         <activity
                 android:name=".MainActivity"
                 android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
                 android:name=".section05_canvas.f_event.EventCanvasMainActivity"
@@ -101,6 +97,11 @@
                 android:name=".section05_canvas_clip.a_canvas_clip.ClipCanvasMainActivity"
                 android:exported="true"
                 android:theme="@style/Theme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
                 android:name=".section04_path.a_path.PathApiViewActivity"

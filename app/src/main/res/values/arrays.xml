@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="iconsArray">
+        <item>@drawable/home</item>
+        <item>@drawable/center</item>
+        <item>@drawable/min</item>
+    </array>
+</resources>

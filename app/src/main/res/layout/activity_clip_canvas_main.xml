@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_color"
+        android:background="@color/light_gray"
         tools:context=".section05_canvas_clip.a_canvas_clip.ClipCanvasMainActivity">
 
     <com.example.draw_android.section05_canvas_clip.a_canvas_clip.CurvedBottomView
@@ -43,4 +43,15 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+    <com.example.draw_android.section05_canvas_clip.a_canvas_clip.BottomBarNavigationView
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            app:icons="@array/iconsArray"
+            app:bgColor="@color/teal_200"
+            app:circleRadius="19dp"
+            app:iconSize="22dp"
+            app:cubicMargin="3dp"
+            android:layout_height="70dp"/>
 </RelativeLayout>

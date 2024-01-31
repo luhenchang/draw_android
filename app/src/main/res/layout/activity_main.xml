@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/img_length"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.example.draw_android.section05_canvas.g_clip.CustomImageView
             android:visibility="gone"
@@ -10,9 +12,20 @@
             android:paddingEnd="10dp"
             android:layout_width="120dp"
             android:layout_height="120dp" />
+
     <com.example.draw_android.section05_canvas_clip.a_canvas_clip.ClipClockView
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
+
+    <com.example.draw_android.section05_canvas_clip.a_canvas_clip.BottomBarNavigationView
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            app:icons="@array/iconsArray"
+            android:layout_height="70dp"/>
+
 
     <LinearLayout
             android:visibility="gone"
@@ -33,7 +46,7 @@
                 android:id="@+id/topView"
                 android:background="@color/red"
                 android:layout_width="match_parent"
-                android:layout_height="30.dp"
+                android:layout_height="30dp"
                 android:orientation="horizontal" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -46,6 +59,6 @@
                 android:visibility="gone"
                 android:background="@color/blue"
                 android:layout_width="match_parent"
-                android:layout_height="30.dp" />
+                android:layout_height="30dp" />
     </LinearLayout>
-</FrameLayout>
+</RelativeLayout>
