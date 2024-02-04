@@ -1,4 +1,4 @@
-package com.example.draw_android.section05_canvas_clip.a_canvas_clip
+package com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -14,7 +14,6 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import androidx.compose.runtime.produceState
 import androidx.core.animation.addListener
 import com.example.draw_android.PointIsInPath
 import com.example.draw_android.R

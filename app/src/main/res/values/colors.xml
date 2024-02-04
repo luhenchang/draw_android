@@ -13,7 +13,7 @@
     <color name="blue">#0C51DC</color>
     <color name="bg_color">#FFF9C4</color>
     <color name="bg_card_color">#009688</color>
-    <color name="light_gray">#F5F1EFEF</color>
+    <color name="light_gray">#FEFEFE</color>
 
-
+    <color name="get_color">#CAC7C6</color>
 </resources>
