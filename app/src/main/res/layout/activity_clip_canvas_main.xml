@@ -16,6 +16,7 @@
             app:curvedStartY="160dp" />
 
     <androidx.cardview.widget.CardView
+            android:visibility="gone"
             android:id="@+id/top_card"
             android:layout_width="match_parent"
             android:layout_marginTop="100dp"
@@ -43,6 +44,7 @@
            android:background="@drawable/img_gold"
            android:layout_width="match_parent"
            app:progressScale="0.5"
+           app:isDragProgress="true"
            android:layout_height="120dp"/>
 
     <com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.ProgressBarView
@@ -52,6 +54,7 @@
             android:background="@drawable/img_jinshu_svg"
             android:layout_width="match_parent"
             app:progressScale="0.5"
+            app:isDragProgress="false"
             android:layout_height="120dp"/>
 
     <com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.ProgressBallView
@@ -79,4 +82,15 @@
             app:iconSize="22dp"
             app:cubicMargin="3dp"
             android:layout_height="70dp"/>
+    <com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.EchartsCubicView
+            android:background="@drawable/img_jinshu_svg"
+            android:id="@+id/echarts_cubic"
+            android:layout_width="match_parent"
+            android:layout_marginTop="110dp"
+            android:layout_height="200dp"/>
+    <com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.CustomView
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:background="@drawable/img_jinshu_svg"
+            android:layout_height="300dp"/>
 </RelativeLayout>

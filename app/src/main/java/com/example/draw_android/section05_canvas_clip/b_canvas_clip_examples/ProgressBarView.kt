@@ -12,9 +12,12 @@ import android.graphics.Paint
 import android.graphics.Paint.Cap
 import android.graphics.Path
 import android.graphics.Rect
+import android.graphics.RectF
+import android.graphics.Region
 import android.graphics.Shader
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import com.example.draw_android.R
@@ -22,47 +25,64 @@ import kotlin.math.min
 
 
 class ProgressBarView : View {
+    private var isDragProgress: Boolean = false
+
     //这个用于路线部分的轻微调整的距离
     private val marginOut: Int = 2
 
     //文字框的高度可以作为变量，提供属性给开发着使用
     private var textRectHeight: Float = 60f
+
     //进度百分比范围0f-1f
     private var progressScale: Float = 0f
+
     //bitmap可有可无，可以使用background设置。
     private lateinit var bitmap: Bitmap
+
     //进度渠上边阴影路径
     private val shadowTopPath = Path()
+
     //进度渠下边缘阴影路径
     private val shadowBottomPath = Path()
+
     //覆盖到边缘上层，消除接触部分的差异
     private val overShadowPath = Path()
+
     //文字框区域
     private val textRectPath = Path()
 
     //控件自定义左右margin，大家可以获取自身margin做为变量
     private var margin: Float = 250f
+
     //进度条的高度，最好设置为属性对外提供方法等，由于进度我就不做分装属性了
     private var progressBarHeight: Float = 80f
+
     //进度渠背景绘制的画笔
     private var progressBgDitchPaint = Paint()
+
     //进度渠上边缘的阴影部分的画笔
     private var progressTopShadowOutPaint = Paint()
+
     //进度渠下边缘的阴影部分的画笔
     private var progressBottomShadowOutPaint = Paint()
+
     //覆盖上下边缘由于交界处的不连贯，进行覆盖。
     private val progressOutPathPaint = Paint()
+
     //进度条的画笔
     private val progressPaint = Paint()
+
     //进度条下面的阴影paint
     private val progressShadowPaint = Paint()
+
     //文字框背景颜色画笔
     private val textRectBgPaint = Paint()
+
     //文字框阴影画笔
     private val textRectShadowPaint = Paint()
+
     //文字画笔
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-
 
 
     constructor(context: Context) : super(context) {
@@ -80,9 +100,19 @@ class ProgressBarView : View {
     ) {
         init(attrs)
     }
+
     //设置动画，由动画控制其进度条。比较丝毫
     fun setProgressScale(progressScale: Float) {
-        startAnimal(minOf(progressScale,1f))
+        progressScale.apply { }
+        if (isDragProgress) {
+            return
+        }
+        startAnimal(minOf(progressScale, 1f))
+    }
+
+    private var progressListener: ((progress: Float) -> Unit)? = null
+    fun setProgressListener(listener: (progress: Float) -> Unit) {
+        progressListener = listener
     }
 
     private var animator: ValueAnimator? = null
@@ -111,6 +141,7 @@ class ProgressBarView : View {
                 context.obtainStyledAttributes(attrs, R.styleable.ProgressBarView)
             //获取customBackground 属性的值【可能是图片可能是颜色】
             progressScale = array.getFloat(R.styleable.ProgressBarView_progressScale, 0f)
+            isDragProgress = array.getBoolean(R.styleable.ProgressBarView_isDragProgress, false)
             array.recycle()
         }
         bitmap = BitmapFactory.decodeResource(resources, R.drawable.img_jinshu)
@@ -318,16 +349,21 @@ class ProgressBarView : View {
         val textTopCenterX = margin - 2f + progressWidth
         val textRectWidthGeneral = 50f
         val textRectWidthMin = textRectWidthGeneral - 20f
-        val textRectCornerHeight =  9f
-        val textRectCornerControlHeight =  11f
+        val textRectCornerHeight = 9f
+        val textRectCornerControlHeight = 11f
         canvas.save()
-        canvas.translate(0f, -textRectHeight*2.4f)
+        canvas.translate(0f, -textRectHeight * 2.4f)
 
         textRectPath.apply {
             moveTo(textTopCenterX, 0f)
             //绘制右上角
             lineTo(textTopCenterX + textRectWidthMin, 0f)
-            quadTo(textTopCenterX + textRectWidthGeneral, 0f, textTopCenterX + textRectWidthGeneral, 10f)
+            quadTo(
+                textTopCenterX + textRectWidthGeneral,
+                0f,
+                textTopCenterX + textRectWidthGeneral,
+                10f
+            )
             //绘制右下角
             lineTo(textTopCenterX + textRectWidthGeneral - 2, textRectHeight - 20f)
 
@@ -340,14 +376,29 @@ class ProgressBarView : View {
             lineTo(textTopCenterX + textRectWidthMin, textRectHeight)
             lineTo(textTopCenterX + 10f, textRectHeight)
 
-            quadTo(textTopCenterX+5, textRectHeight, textTopCenterX+2, textRectHeight+textRectCornerHeight)
-            lineTo(textTopCenterX+2,textRectHeight+textRectCornerHeight)
+            quadTo(
+                textTopCenterX + 5,
+                textRectHeight,
+                textTopCenterX + 2,
+                textRectHeight + textRectCornerHeight
+            )
+            lineTo(textTopCenterX + 2, textRectHeight + textRectCornerHeight)
 
             //这里是底部最高点
-            quadTo(textTopCenterX,textRectHeight+textRectCornerControlHeight,textTopCenterX-2,textRectHeight+textRectCornerHeight)
-            lineTo(textTopCenterX-2,textRectHeight+textRectCornerHeight)
+            quadTo(
+                textTopCenterX,
+                textRectHeight + textRectCornerControlHeight,
+                textTopCenterX - 2,
+                textRectHeight + textRectCornerHeight
+            )
+            lineTo(textTopCenterX - 2, textRectHeight + textRectCornerHeight)
 
-            quadTo(textTopCenterX-5, textRectHeight, textTopCenterX - textRectCornerControlHeight, textRectHeight)
+            quadTo(
+                textTopCenterX - 5,
+                textRectHeight,
+                textTopCenterX - textRectCornerControlHeight,
+                textRectHeight
+            )
             lineTo(textTopCenterX - textRectWidthMin, textRectHeight)
             quadTo(
                 textTopCenterX - textRectWidthGeneral,
@@ -356,20 +407,25 @@ class ProgressBarView : View {
                 textRectHeight - 20f
             )
             lineTo(textTopCenterX - textRectWidthGeneral - 4, 10f)
-            quadTo(textTopCenterX - textRectWidthGeneral - 2, 0f, textTopCenterX - textRectWidthMin, 0f)
+            quadTo(
+                textTopCenterX - textRectWidthGeneral - 2,
+                0f,
+                textTopCenterX - textRectWidthMin,
+                0f
+            )
             close()
         }
 
 
         canvas.save()
         //稍作调整画布位置，先绘制阴影部分。
-        canvas.translate(0f,-2f)
+        canvas.translate(0f, -2f)
         canvas.drawPath(textRectPath, textRectShadowPaint)
         //绘制文字框背景之前赶紧恢复画布，让其绘制区域可以覆盖住阴影部分的带有颜色的边缘线
         canvas.restore()
         canvas.drawPath(textRectPath, textRectBgPaint)
         //绘制进度文字
-        val formattedNumber = "%.0f".format(progressScale*100)
+        val formattedNumber = "%.0f".format(progressScale * 100)
         val textContent = "$formattedNumber%"
         val rectContent = Rect()
         textPaint.getTextBounds(
@@ -378,10 +434,15 @@ class ProgressBarView : View {
             textContent.length,
             rectContent
         )
-        val textWidth =rectContent.width()
+        val textWidth = rectContent.width()
         val textHeight = rectContent.height()
         //画图，加减计算。没别的。
-        canvas.drawText(textContent,textTopCenterX-textWidth/2f,textRectHeight/2f+textHeight/2f,textPaint)
+        canvas.drawText(
+            textContent,
+            textTopCenterX - textWidth / 2f,
+            textRectHeight / 2f + textHeight / 2f,
+            textPaint
+        )
     }
 
     /**
@@ -423,5 +484,63 @@ class ProgressBarView : View {
             )
             close()
         }
+    }
+
+    override fun performClick(): Boolean {
+        return super.performClick()
+    }
+
+    //距离Y轴的水平移动距离
+    private var viewToY = 0f
+    private var startX = 0f
+    private var clickDow = false
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_UP -> {
+                clickDow = false
+                startX = 0f
+            }
+
+            MotionEvent.ACTION_MOVE -> {
+                //每次通知计算滑动的一点点
+                val dis = event.x - startX
+                //记录这次移动结束的event.x就是下一次的滑动起始滑动的位置
+                startX = event.x
+                //将每次的滑动小段距离在当前距离的基础上叠加起来
+                if (viewToY + dis >= 0 && viewToY + dis <= width.toFloat() - margin) {
+                    viewToY += dis
+                    progressScale = (viewToY / (width.toFloat() - margin))
+                    progressListener?.invoke(progressScale)
+                    invalidate()
+                }
+            }
+
+            MotionEvent.ACTION_DOWN -> {
+                performClick()
+                clickDow = true
+                startX = event.x
+                return true
+            }
+
+        }
+        return true
+    }
+
+    private fun Path.containsPoint(x: Float, y: Float): Boolean {
+        val bounds = RectF()
+        this.computeBounds(bounds, true)
+        val region = Region()
+        region.setPath(
+            this,
+            Region(
+                Rect(
+                    bounds.left.toInt(),
+                    bounds.top.toInt(),
+                    bounds.right.toInt(),
+                    bounds.bottom.toInt()
+                )
+            )
+        )
+        return region.contains(x.toInt(), y.toInt())
     }
 }

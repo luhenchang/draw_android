@@ -20,6 +20,8 @@
 
     <declare-styleable name="ProgressBarView">
         <attr name="progressScale" format="float" />
+        <attr name="isDragProgress" format="boolean" />
+
     </declare-styleable>
 
     <declare-styleable name="ProgressBallView">

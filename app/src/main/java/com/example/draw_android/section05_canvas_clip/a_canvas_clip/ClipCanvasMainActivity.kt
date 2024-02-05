@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.WindowCompat
 import com.example.draw_android.R
+import com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.EchartsCubicView
 import com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.ProgressBallView
 import com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.ProgressBarView
 
@@ -12,7 +13,11 @@ class ClipCanvasMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_clip_canvas_main)
+        val echartsCubicView = findViewById<EchartsCubicView>(R.id.echarts_cubic)
         val progressBar = findViewById<ProgressBarView>(R.id.progressBar)
+        progressBar.setProgressListener {
+            echartsCubicView.setCubicCircle(it)
+        }
         progressBar.setOnClickListener {
             progressBar.setProgressScale(0.8f)
         }
@@ -24,7 +29,7 @@ class ClipCanvasMainActivity : AppCompatActivity() {
 
         val progressBall = findViewById<ProgressBallView>(R.id.progressBall)
         progressBall.setOnClickListener {
-            progressBall.setProgressScale(1f)
+            progressBall.setProgressScale(0.6f)
         }
 
     }
