@@ -1,12 +1,16 @@
 package com.example.draw_android.section05_canvas_clip.a_canvas_clip
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import com.example.draw_android.R
+import com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.BarChart
+import com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.BarChart.BarInfo
 import com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.EchartsCubicView
 import com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.ProgressBallView
 import com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.ProgressBarView
+import java.util.Random
+
 
 class ClipCanvasMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,5 +36,19 @@ class ClipCanvasMainActivity : AppCompatActivity() {
             progressBall.setProgressScale(0.6f)
         }
 
+        val barchart = findViewById<BarChart>(R.id.barChart)
+        mRandom = Random()
+        barchart.setBarInfoList(createBarInfo());barchart.setBarInfoList(createBarInfo())
+    }
+    private val DATA_COUNT_INTERVAL = 10
+    private val DATA_COUNT_MAX = 300
+    private val mDataCount = 100
+    private var mRandom: Random? = null
+    private fun createBarInfo(): List<BarInfo> {
+        val data: MutableList<BarInfo> = ArrayList()
+        for (i in 1..mDataCount) {
+            data.add(BarInfo(i.toString() + "日", mRandom!!.nextFloat().toDouble()))
+        }
+        return data
     }
 }

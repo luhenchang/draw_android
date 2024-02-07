@@ -1,6 +1,5 @@
 package com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples
 
-import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -15,16 +14,10 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import android.view.animation.DecelerateInterpolator
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.ui.res.booleanResource
-import androidx.core.animation.addPauseListener
 import com.example.draw_android.R
-import kotlin.math.abs
-import kotlin.math.max
 import kotlin.math.min
 
-class EchartsCubicView : View {
+class ViewScrollToView : View {
     private var clipPath: Path = Path()
     private val textMarginX: Float = 20f
     private val poWidth: Float = 250f
@@ -202,7 +195,7 @@ class EchartsCubicView : View {
         cubicInnerPath.lineTo(0f, dataList[0])
         //坐标变换到左下角为坐标原点，且右上方为正方向
         canvas.save()
-        canvas.translate(marginWidth + viewToY, height - marginTopAndBottom)
+        canvas.translate(marginWidth, height - marginTopAndBottom)
         canvas.scale(1f, -1f)
         //裁剪
         //计算每一个上坡或者下坡的水平宽度，水平单位长度都应该是固定的。例如总共有5条数据，会分为4条上下坡，画图试一试。
@@ -296,70 +289,41 @@ class EchartsCubicView : View {
         canvas.drawPath(arrowheadYPath, outPathShadowPaint)
         canvas.drawPath(arrowheadYPath, outPathLine)
         canvas.restore()
-
-
         //绘制X对称轴
         canvas.drawLine(0f, 0f, scaleWidth * (dataList.size - 1), 0f, outPathShadowPaint)
         canvas.drawLine(0f, 0f, scaleWidth * (dataList.size - 1), 0f, outPathLine)
 
     }
 
-    private var animator: ValueAnimator? = null
-    private var animatorBall: ValueAnimator? = null
-
-    private fun startAnimal(starAnimal: Float) {
-        animator?.cancel()
-        // 设置弹性动画
-        animator = ValueAnimator.ofFloat(
-            0f,
-            starAnimal
-        )
-        animator?.apply {
-            duration = 5000 //时间1秒，当然你可以设置一个属性提供给开发着属性变量
-            repeatCount = INVISIBLE
-            repeatMode = ValueAnimator.REVERSE
-            interpolator = DecelerateInterpolator()
-            addUpdateListener { animation ->
-                cubicCircle = animation.animatedValue as Float
-                invalidate()
-            }
-            addPauseListener {
-                animatorBall?.cancel()
-            }
-            start()
-        }
-    }
     override fun performClick(): Boolean {
         return super.performClick()
     }
     //距离Y轴的水平移动距离
-    private var viewToY = 0f
+    private var initScrollToViewWidth = 0f
     private var startX = 0f
-    private var clickDow = false
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_UP -> {
-                clickDow = false
                 startX = 0f
             }
 
             MotionEvent.ACTION_MOVE -> {
                 //每次通知计算滑动的一点点
                 val dis = event.x - startX
-                //记录这次移动结束的event.x就是下一次的滑动起始滑动的位置
-                startX = event.x
                 //将每次的滑动小段距离在当前距离的基础上叠加起来
-                if (viewToY + dis > -(dataList.size - 1) * poWidth +(width-2*marginWidth) && viewToY + dis <= outPathLine.strokeWidth / 2f) {
-                    viewToY += dis
-                    invalidate()
+                if (initScrollToViewWidth + dis >= -(dataList.size - 1) * poWidth +(width-2*marginWidth) && initScrollToViewWidth + dis <= outPathLine.strokeWidth / 2f) {
+                    initScrollToViewWidth += dis
+                    //scrollTo((-initScrollToViewWidth).toInt(),0)
+                    scrollBy(-dis.toInt(),0)
                 }
+                //前面手势课程讲的很清楚了，记录当前手势所在横坐标，在每次执行手势移动事件结束都需要更新移动的开始点，避免距离过大，滑动过快。
+                startX = event.x
             }
 
             MotionEvent.ACTION_DOWN -> {
                 performClick()
-                clickDow = true
                 startX = event.x
-                return true
             }
 
         }
