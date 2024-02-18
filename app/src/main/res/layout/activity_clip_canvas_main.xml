@@ -93,7 +93,7 @@
             android:visibility="gone"
             android:background="@drawable/img_jinshu_svg"
             android:layout_height="300dp"/>
-    <com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.SlidingPanelView
+    <com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples.ScrollerStudyView
             android:background="@drawable/img_gold"
             android:layout_marginTop="110dp"
             android:layout_width="match_parent"
