@@ -1,64 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/img_length"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:layout_height="match_parent">
 
-    <com.example.draw_android.section05_canvas.g_clip.CustomImageView
+    <androidx.recyclerview.widget.RecyclerView
             android:visibility="gone"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:layout_width="120dp"
-            android:layout_height="120dp" />
-
-    <com.example.draw_android.section05_canvas_clip.a_canvas_clip.ClipClockView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    <com.example.draw_android.ArcView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    <com.example.draw_android.MyPieChartView
+            android:visibility="gone"
+            android:id="@+id/pie_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    <com.example.draw_android.ChinaMapView
+            android:visibility="gone"
+            android:background="@drawable/map_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    <com.example.draw_android.section12_particle.CustomParticlePesterView
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-    <com.example.draw_android.section05_canvas_clip.a_canvas_clip.BottomBarNavigationView
-            android:layout_alignParentBottom="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            app:icons="@array/iconsArray"
-            android:layout_height="70dp"/>
-
-
-    <LinearLayout
+    <com.example.draw_android.section12_particle.FireworksView
             android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context=".MainActivity">
+            android:layout_height="match_parent" />
+    <com.example.draw_android.section12_particle.CustomParticlePesterView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    <com.example.draw_android.section12_particle.CustomGestureExplodeView
+            android:visibility="gone"
+            android:id="@+id/loadProgress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-        <com.example.draw_android.section05_canvas.f_event.ScreenImageView
+    <RelativeLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <com.example.draw_android.section05_canvas.g_clip.CustomImageView
                 android:visibility="gone"
-                android:id="@+id/imgView"
-                android:background="@color/black"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp" />
+
+        <com.example.draw_android.section05_canvas_clip.a_canvas_clip.ClipClockView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/topView"
-                android:background="@color/red"
+        <com.example.draw_android.section05_canvas_clip.a_canvas_clip.BottomBarNavigationView
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:orientation="horizontal" />
+                app:icons="@array/iconsArray"
+                android:layout_height="70dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:layout_weight="1"
-                android:id="@+id/rvView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp" />
 
         <LinearLayout
                 android:visibility="gone"
-                android:background="@color/blue"
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
-    </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context=".MainActivity">
+
+            <com.example.draw_android.section05_canvas.f_event.ScreenImageView
+                    android:visibility="gone"
+                    android:id="@+id/imgView"
+                    android:background="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/topView"
+                    android:background="@color/red"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_weight="1"
+                    android:id="@+id/rvView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+
+            <LinearLayout
+                    android:visibility="gone"
+                    android:background="@color/blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>
