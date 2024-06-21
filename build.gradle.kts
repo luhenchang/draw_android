@@ -17,7 +17,7 @@ buildscript {
     dependencies {
         val ext = project.extra
         classpath("com.android.tools.build:gradle:${ext["gradleVersion"]}")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24")
 
     }
 
