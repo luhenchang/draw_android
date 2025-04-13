@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.WindowCompat
 import com.example.draw_android.R
-import com.example.draw_android.databinding.ActivityPaintApiviewBinding
 
 class PaintAPIViewActivity : AppCompatActivity() {
-    private lateinit var mBinding: ActivityPaintApiviewBinding
 
     @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
