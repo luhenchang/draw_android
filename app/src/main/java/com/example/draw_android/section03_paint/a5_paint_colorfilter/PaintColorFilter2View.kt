@@ -48,6 +48,11 @@ class PaintColorFilter2View(context: Context?, attrs: AttributeSet?) :
                 (index / 4) * (rectWidth + padding) + rectWidth
             )
             canvas.drawBitmap(mBitmap, srcRect, dstRect, mPaint)
+            canvas.drawText(
+                PorterDuff.Mode.entries[index].name,
+                ((index % 4) * (rectWidth + padding)).toFloat(),
+                ((index / 4) * (rectWidth + padding) + rectWidth).toFloat(), mPaint
+            )
         }
     }
 
