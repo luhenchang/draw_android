@@ -1,39 +1,38 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-parcelize")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
+    id("kotlin-kapt")
+    id ("kotlin-parcelize")
 }
 
+
 android {
-    val composeVersion: String by rootProject.extra
+    namespace = "com.example.draw_android"
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.draw_android"
-        compileSdk = 34
         minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments["room.schemaLocation"] = "$projectDir/schemas"
-                //arguments += ["room.schemaLocation"("$projectDir/schemas".toString())]
-            }
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
         }
     }
 
     buildTypes {
         release {
-            @Suppress("UnstableApiUsage")
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
-                @Suppress("UnstableApiUsage")
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
-    android.viewBinding.isEnabled = true
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -44,12 +43,6 @@ android {
     buildFeatures {
         compose = true
     }
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.14"
     }

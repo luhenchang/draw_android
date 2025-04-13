@@ -19,6 +19,7 @@ class PaintColorFilter2View(context: Context?, attrs: AttributeSet?) :
     private val mBitmap: Bitmap
     private val mPaint = Paint()
     private val mLightingColorFilter: Array<PorterDuffColorFilter?>
+
     private val length = PorterDuff.Mode.values().size
     private val padding = 5
     private val rectWidth = 300
