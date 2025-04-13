@@ -11,6 +11,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     <com.example.draw_android.ArcView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    <com.example.draw_android.section03_paint.a5_paint_colorfilter.PaintColorFilter2View
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     <com.example.draw_android.MyPieChartView
