@@ -1,13 +1,13 @@
-mapOf(
-    Pair("minSdkVer", 22),
-    Pair("targetSdkVer", 25),
-    Pair("compiledSdkVer", 25),
-    Pair("buildToolsVer", "26-rc4"),
-    Pair("gradleVersion","7.4.2"),
-    Pair("composeVersion","1.4.2")
-).entries.forEach {
-    project.extra.set(it.key, it.value)
-}
+//mapOf(
+//    Pair("minSdkVer", 22),
+//    Pair("targetSdkVer", 25),
+//    Pair("compiledSdkVer", 25),
+//    Pair("buildToolsVer", "26-rc4"),
+//    Pair("gradleVersion","7.4.2"),
+//    Pair("composeVersion","1.4.2")
+//).entries.forEach {
+//    project.extra.set(it.key, it.value)
+//}
 
 //ext {
 //    androids = [

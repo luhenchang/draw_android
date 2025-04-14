@@ -1,69 +1,56 @@
 [versions]
-agp = "8.2.2"
-accompanistPager = "0.18.0"
-androidx-hiltNavigationCompose = "1.2.0"
-androidx-palette-palette2 = "1.0.0"
-coilVersion = "2.4.0"
-com-google-dagger-hiltAndroid = "2.50"
-constraintlayoutComposeVersion = "1.0.1"
-google-hiltAndroidCompiler = "2.50"
-google-daggerCompiler = "2.50"
-google-dagger = "2.50"
-google-hiltCompiler = "2.50"
-kotlin = "1.9.24"
-core-ktx = "1.13.1"
+activityCompose = "1.10.1"
+agp = "8.6.1"
+composeBom = "2025.04.00"
+constraintlayout = "2.2.1"
+coreKtx = "1.16.0"
+espressoCoreVersion = "3.6.1"
+foundation = "1.7.8"
+gson = "2.10.1"
+jacksonModuleKotlin = "2.13.0"
 junit = "4.13.2"
-androidx-test-ext-junit = "1.1.5"
-espresso-core = "3.5.1"
-lifecycle-runtime-ktx = "2.8.0"
-activity-compose = "1.9.0"
-compose-bom = "2024.05.00"
-navVersion = "2.7.7"
-accompanist_version = "0.34.0"
-materialVersion = "1.6.7"
-retrofitVersion = "2.9.0"
-window = "1.2.0"
-datastorePreferences = "1.1.1"
-constraintlayoutVersion = "2.1.4"
+junitVersion = "1.2.1"
+kotlin = "1.9.24"
+appcompatVersion = "1.7.0"
+lifecycleRuntimeKtx = "2.8.7"
+material = "1.12.0"
+material3Android = "1.3.2"
+materialIconsCore = "1.7.8"
+materialIconsExtended = "1.7.8"
+materialVersion = "1.7.8"
+media = "1.7.0"
+runtimeLivedata = "1.7.8"
+runtimeRxjava2 = "1.7.8"
+ui = "1.7.8"
+uiTestJunit4 = "1.7.8"
 
 [libraries]
-accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistPager" }
-androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutComposeVersion" }
-androidx-lifecycle-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-runtime-ktx" }
-androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navVersion" }
-androidx-navigation-testing = { module = "androidx.navigation:navigation-testing", version.ref = "navVersion" }
-androidx-palette-palette2 = { module = "androidx.palette:palette", version.ref = "androidx-palette-palette2" }
-coil-video = { module = "io.coil-kt:coil-video", version.ref = "coilVersion" }
-coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coilVersion" }
-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilVersion" }
-coil = { module = "io.coil-kt:coil", version.ref = "coilVersion" }
-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitVersion" }
-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidx-hiltNavigationCompose" }
-google-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "com-google-dagger-hiltAndroid" }
-dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "google-hiltAndroidCompiler" }
-google-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "google-daggerCompiler" }
-google-dagger = { module = "com.google.dagger:dagger", version.ref = "google-dagger" }
-dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "google-hiltCompiler" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
-ui = { group = "androidx.compose.ui", name = "ui" }
-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-material3 = { group = "androidx.compose.material3", name = "material3" }
-material = { group = "androidx.compose.material", name = "material",version.ref = "materialVersion"}
-google-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist_version" }
-androidx-window = { group = "androidx.window", name = "window", version.ref = "window" }
-androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
-androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayoutVersion" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "foundation" }
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-material = { module = "androidx.compose.material:material", version.ref = "materialVersion" }
+androidx-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "materialIconsCore" }
+androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
+androidx-material3-android = { module = "androidx.compose.material3:material3-android", version.ref = "material3Android" }
+androidx-media = { module = "androidx.media:media", version.ref = "media" }
+androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "runtimeLivedata" }
+androidx-runtime-rxjava2 = { module = "androidx.compose.runtime:runtime-rxjava2", version.ref = "runtimeRxjava2" }
+androidx-ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
+androidx-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
+androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "uiTestJunit4" }
+androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "ui" }
+androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCoreVersion" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jacksonModuleKotlin" }
+junit = { module = "junit:junit", version.ref = "junit" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

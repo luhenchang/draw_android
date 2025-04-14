@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace = "com.example.draw_android"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.draw_android"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -52,41 +52,41 @@ android {
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.10.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
     implementation(files("libs/sun.misc.BASE64Decoder.jar"))
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation ("androidx.media:media:1.7.0")
-    implementation("androidx.compose.material3:material3-android:1.2.0-alpha10")
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation (libs.androidx.media)
+    implementation(libs.androidx.material3.android)
     //implementation(project(":clip_img"))
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("com.google.code.gson:gson:2.10.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.espresso.core)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.gson)
 
     //Compose UI库
-    implementation("androidx.activity:activity-compose:1.8.0")
-    implementation("androidx.compose.ui:ui:1.5.4")
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.ui)
     // Tooling supp("rt (Previews, etc.)
-    implementation("androidx.compose.ui:ui-tooling:1.5.4")
+    implementation(libs.androidx.ui.tooling)
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-    implementation("androidx.compose.foundation:foundation:1.5.4")
+    implementation(libs.androidx.foundation)
     // Material Design
-    implementation("androidx.compose.material:material:1.5.4")
+    implementation(libs.androidx.material)
     // Material design icons
-    implementation("androidx.compose.material:material-icons-core:1.5.4")
-    implementation("androidx.compose.material:material-icons-extended:1.5.4")
+    implementation(libs.androidx.material.icons.core)
+    implementation(libs.androidx.material.icons.extended)
     // Integration with observables
-    implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
-    implementation("androidx.compose.runtime:runtime-rxjava2:1.5.4")
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.runtime.rxjava2)
     // UI Tests
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.4")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation ("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")  // 使用适当的版本号
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    debugImplementation(libs.androidx.ui.test.manifest)
+    implementation (libs.jackson.module.kotlin)  // 使用适当的版本号
 }
