@@ -1,7 +1,7 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.compose.compiler)
     id("kotlin-kapt")
     id ("kotlin-parcelize")
 }
@@ -9,12 +9,11 @@ plugins {
 
 android {
     namespace = "com.example.draw_android"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.draw_android"
         minSdk = 26
-        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
