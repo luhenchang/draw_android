@@ -22,4 +22,5 @@ app/proguard-rules.pro
 local.properties
 *.keystore
 /gradle/libs.versions.toml
+/gradle/wrapper/gradle-wrapper.properties
 build.gradle.kts
