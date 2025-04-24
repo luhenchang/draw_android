@@ -14,7 +14,7 @@ import android.view.View
 import com.example.draw_android.R
 
 
-class ColorMatrixView(context: Context?, attrs: AttributeSet?) :
+class ColorMatrixRotateView(context: Context?, attrs: AttributeSet?) :
     View(context, attrs) {
     private var mPaint: Paint? = null
     private var mBitmap: Bitmap? = null
@@ -31,7 +31,13 @@ class ColorMatrixView(context: Context?, attrs: AttributeSet?) :
         mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         mBitmap = BitmapFactory.decodeResource(resources, R.drawable.wuman)
         for (i in 0..23) {
-            colorMatrix.setScale(i * .1f, i * .1f, i * .1f, i * .1f)
+            if (i<8){
+                colorMatrix.setRotate(0, (i * 50).toFloat())
+            }else if (i < 16){
+                colorMatrix.setRotate(1, (i * 50).toFloat())
+            }else {
+                colorMatrix.setRotate(2, (i * 50).toFloat())
+            }
             matrixColorFilter[i] = ColorMatrixColorFilter(colorMatrix)
         }
     }

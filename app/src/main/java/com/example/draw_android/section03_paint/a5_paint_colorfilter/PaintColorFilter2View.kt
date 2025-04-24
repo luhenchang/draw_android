@@ -20,7 +20,7 @@ class PaintColorFilter2View(context: Context?, attrs: AttributeSet?) :
     private val mPaint = Paint()
     private val mLightingColorFilter: Array<PorterDuffColorFilter?>
 
-    private val length = PorterDuff.Mode.values().size
+    private val length = PorterDuff.Mode.entries.size
     private val padding = 5
     private val rectWidth = 300
 
@@ -30,7 +30,7 @@ class PaintColorFilter2View(context: Context?, attrs: AttributeSet?) :
         mBitmap = BitmapFactory.decodeResource(resources, R.drawable.wuman);
         mLightingColorFilter = arrayOfNulls(length)
         var index = 0
-        PorterDuff.Mode.values().forEach { mode ->
+        PorterDuff.Mode.entries.forEach { mode ->
             mLightingColorFilter[index++] = PorterDuffColorFilter(Color.RED, mode)
         }
     }
@@ -40,7 +40,7 @@ class PaintColorFilter2View(context: Context?, attrs: AttributeSet?) :
         super.onDraw(canvas)
         val srcRect = Rect(0, 0, mBitmap.width, mBitmap.height)
         for (index in 0 until length) {
-            mPaint.setColorFilter(mLightingColorFilter[index]);
+            mPaint.colorFilter = mLightingColorFilter[index];
             val dstRect = Rect(
                 (index % 4) * (rectWidth + padding),
                 (index / 4) * (rectWidth + padding),

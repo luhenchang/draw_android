@@ -14,7 +14,7 @@ import android.view.View
 import com.example.draw_android.R
 
 
-class ColorMatrixView(context: Context?, attrs: AttributeSet?) :
+class ColorMatrixSaturationView(context: Context?, attrs: AttributeSet?) :
     View(context, attrs) {
     private var mPaint: Paint? = null
     private var mBitmap: Bitmap? = null
@@ -31,7 +31,17 @@ class ColorMatrixView(context: Context?, attrs: AttributeSet?) :
         mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         mBitmap = BitmapFactory.decodeResource(resources, R.drawable.wuman)
         for (i in 0..23) {
-            colorMatrix.setScale(i * .1f, i * .1f, i * .1f, i * .1f)
+            if (i<4){
+                colorMatrix.setSaturation(i*0.2f)
+            }else if (i < 8){
+                colorMatrix.setSaturation(i*0.5f)
+            }else if (i < 12){
+                colorMatrix.setSaturation(i*1f)
+            }else if (i < 16){
+                colorMatrix.setSaturation(i*1.5f)
+            }else {
+                colorMatrix.setSaturation(i*2f)
+            }
             matrixColorFilter[i] = ColorMatrixColorFilter(colorMatrix)
         }
     }

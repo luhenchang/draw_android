@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "imperial_residence"
+rootProject.name = "draw_android"
 include(":app")
