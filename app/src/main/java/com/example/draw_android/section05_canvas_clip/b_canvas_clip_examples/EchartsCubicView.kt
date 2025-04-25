@@ -1,6 +1,7 @@
 package com.example.draw_android.section05_canvas_clip.b_canvas_clip_examples
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -40,7 +41,7 @@ class EchartsCubicView : View {
     private var fillPathPaint = Paint()
     private var arrowheadYPaint = Paint()
 
-    private var dataList = arrayListOf(50f, 360f, 150f, 500f, 161f, 250f, 30f, 200f, 130f, 300f)
+    private var dataList = arrayListOf(50f, 360f, 150f, 500f, 161f, 250f, 30f, 200f, 130f, 300f,200f,250f)
     private var cubicPath = Path()
     private var cubicShadowPath = Path()
     private var cubicInnerPath = Path()
@@ -175,6 +176,7 @@ class EchartsCubicView : View {
         }
     }
 
+    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.drawBitmap(bitmap!!, srcRect, dstRect, fillPathPaint)
